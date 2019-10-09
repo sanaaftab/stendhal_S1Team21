@@ -19,8 +19,7 @@ import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.entity.creature.Pet;
 import games.stendhal.server.entity.item.Item;
 import games.stendhal.server.entity.player.Player;
-//import games.stendhal.server.entity.player.PetOwner;;
-
+import games.stendhal.server.entity.player.PetOwner;
 /**
  * Represents an empty/blank pet scroll.
  */
@@ -70,11 +69,13 @@ public class BlankPetScroll extends Scroll {
 
 			final Pet pet = player.getPet();
 
-
 			if (pet != null) {
-				//petOwner.storePet(pet);
+				PetOwner pO = new PetOwner(player);
+				pO.destroy();
+				//pO.setPet(pet);
+				//pO.removePet(pet);
 				player.removePet(pet);
-				pet.getZone().remove(pet);
+				//pet.getZone().remove(pet);
 				player.sendPrivateText("Amazingly your pet melds with the scroll. It just walked right into the page!");
 			}
 

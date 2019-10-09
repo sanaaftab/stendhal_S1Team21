@@ -32,6 +32,10 @@ import games.stendhal.server.entity.item.Item;
 //import games.stendhal.server.core.rule.EntityManager;
 //import games.stendhal.server.entity.creature.Creature;
 import games.stendhal.server.entity.player.Player;
+//imported for testing RPEntity
+import games.stendhal.server.entity.RPEntity;
+//I add PetOwner for testing
+import games.stendhal.server.entity.player.PetOwner;
 
 /**
  * Represents a creature summon pet scroll.
@@ -76,6 +80,8 @@ public class SummonPetScroll extends Scroll {
 	protected boolean useScroll(final Player player) {
 		final StendhalRPZone zone = player.getZone();
 
+		PetOwner pO = new PetOwner(player);
+		
 		if (zone.isInProtectionArea(player)) {
 			player.sendPrivateText("The aura of protection in this area prevents the scroll from working!");
 			return false;
@@ -99,22 +105,29 @@ public class SummonPetScroll extends Scroll {
 		}
 
 		// create it
-		Pet pet = null;
-		switch (type) {
-		case "cat":
-			pet = new Cat(player);
-			break;
-		case "baby dragon":
-			pet = new BabyDragon(player);
-			break;
-		case "purple dragon":
-			pet = new PurpleDragon(player);
-			break;
-		default:
-			// Didn't match a known pet type
-			player.sendPrivateText("This scroll does not seem to work. You should talk to the magician who created it.");
-			return false;
-		}
+		//But where did we save our previous score of our beautiful pet?!
+		//Pet pet = null;
+		
+		Pet pet = pO.getPet();
+		pO.retrievePet();
+		
+		
+		
+//		switch (type) {
+//		case "cat":
+//			pet = new Cat(player);
+//			break;
+//		case "baby dragon":
+//			pet = new BabyDragon(player);
+//			break;
+//		case "purple dragon":
+//			pet = new PurpleDragon(player);
+//			break;
+//		default:
+//			// Didn't match a known pet type
+//			player.sendPrivateText("This scroll does not seem to work. You should talk to the magician who created it.");
+//			return false;
+//		}
 
 		pet.setPosition(player.getX(), player.getY() + 1);
 		dropBlank(player);
