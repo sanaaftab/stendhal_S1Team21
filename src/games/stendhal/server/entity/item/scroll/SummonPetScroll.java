@@ -1,14 +1,3 @@
-/***************************************************************************
- *                   (C) Copyright 2016 - Faiumoni e.V.                    *
- ***************************************************************************
- ***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
 package games.stendhal.server.entity.item.scroll;
 
 //import java.util.ArrayList;
@@ -32,10 +21,6 @@ import games.stendhal.server.entity.item.Item;
 //import games.stendhal.server.core.rule.EntityManager;
 //import games.stendhal.server.entity.creature.Creature;
 import games.stendhal.server.entity.player.Player;
-//imported for testing RPEntity
-import games.stendhal.server.entity.RPEntity;
-//I add PetOwner for testing
-import games.stendhal.server.entity.player.PetOwner;
 
 /**
  * Represents a creature summon pet scroll.
@@ -77,11 +62,9 @@ public class SummonPetScroll extends Scroll {
 	 * @return true iff summoning was successful
 	 */
 	@Override
-	protected boolean useScroll(final Player player) {
+	public boolean useScroll(final Player player) {
 		final StendhalRPZone zone = player.getZone();
 
-		PetOwner pO = new PetOwner(player);
-		
 		if (zone.isInProtectionArea(player)) {
 			player.sendPrivateText("The aura of protection in this area prevents the scroll from working!");
 			return false;
@@ -98,36 +81,57 @@ public class SummonPetScroll extends Scroll {
 			return false;
 		}
 
-		String type = getInfoString().replaceAll("_", " ");
-		if (type == null) {
-			// default to cat, if no other type is specified
-			type = "cat";
-		}
+		
+		String[] arrayOfStats = getInfoString().split(" ");
+		
+//		if (type == null) {
+//			// default to cat, if no other type is specified
+//			type = "cat";
+//		} else {
+//			type = type.replaceAll("_", " ");
+//		}
 
 		// create it
-		//But where did we save our previous score of our beautiful pet?!
-		//Pet pet = null;
-		
-		Pet pet = pO.getPet();
-		pO.retrievePet();
-		
-		
-		
-//		switch (type) {
-//		case "cat":
-//			pet = new Cat(player);
-//			break;
-//		case "baby dragon":
-//			pet = new BabyDragon(player);
-//			break;
-//		case "purple dragon":
-//			pet = new PurpleDragon(player);
-//			break;
-//		default:
-//			// Didn't match a known pet type
-//			player.sendPrivateText("This scroll does not seem to work. You should talk to the magician who created it.");
-//			return false;
-//		}
+		Pet pet = null;
+		switch (arrayOfStats[0]) {
+		case "cat":
+			pet = new Cat(player);
+			pet.setTitle(arrayOfStats[1]);
+			pet.setXP(Integer.parseInt(arrayOfStats[2]));
+			pet.setHP(Integer.parseInt(arrayOfStats[3]));
+			pet.setBaseHP(Integer.parseInt(arrayOfStats[4]));
+			pet.setAtk(Integer.parseInt(arrayOfStats[5]));
+			pet.setDef(Integer.parseInt(arrayOfStats[6]));
+			pet.setWeight(Integer.parseInt(arrayOfStats[7]));
+
+			break;
+		case "baby dragon":
+			pet = new BabyDragon(player);
+			pet.setTitle(arrayOfStats[1]);
+			pet.setXP(Integer.parseInt(arrayOfStats[2]));
+			pet.setHP(Integer.parseInt(arrayOfStats[3]));
+			pet.setBaseHP(Integer.parseInt(arrayOfStats[4]));
+			pet.setAtk(Integer.parseInt(arrayOfStats[5]));
+			pet.setDef(Integer.parseInt(arrayOfStats[6]));
+			pet.setWeight(Integer.parseInt(arrayOfStats[7]));
+
+			break;
+		case "purple dragon":
+			pet = new PurpleDragon(player);
+			pet.setTitle(arrayOfStats[1]);
+			pet.setXP(Integer.parseInt(arrayOfStats[2]));
+			pet.setHP(Integer.parseInt(arrayOfStats[3]));
+			pet.setBaseHP(Integer.parseInt(arrayOfStats[4]));
+			pet.setAtk(Integer.parseInt(arrayOfStats[5]));
+			pet.setDef(Integer.parseInt(arrayOfStats[6]));
+			pet.setWeight(Integer.parseInt(arrayOfStats[7]));
+
+			break;
+		default:
+			// Didn't match a known pet type
+			player.sendPrivateText("This scroll does not seem to work. You should talk to the magician who created it.");
+			return false;
+		}
 
 		pet.setPosition(player.getX(), player.getY() + 1);
 		dropBlank(player);

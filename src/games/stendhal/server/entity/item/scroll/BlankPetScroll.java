@@ -1,15 +1,3 @@
-/* $Id$
- /***************************************************************************
- *                      (C) Copyright 2003 - Marauroa                      *
- ***************************************************************************
- ***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
 package games.stendhal.server.entity.item.scroll;
 
 import java.util.Map;
@@ -19,7 +7,8 @@ import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.entity.creature.Pet;
 import games.stendhal.server.entity.item.Item;
 import games.stendhal.server.entity.player.Player;
-import games.stendhal.server.entity.player.PetOwner;
+//import games.stendhal.server.entity.player.PetOwner;;
+
 /**
  * Represents an empty/blank pet scroll.
  */
@@ -57,25 +46,32 @@ public class BlankPetScroll extends Scroll {
 	 * @return always true
 	 */
 	@Override
-	protected boolean useScroll(final Player player) {
+	public boolean useScroll(final Player player) {
 		final StendhalRPZone zone = player.getZone();
-		final String petName = player.getPet().getName();
+		final Pet pet = player.getPet();
+		
+		final String petType = pet.getName();
+		final String petName = pet.getTitle();
+		final int petXP = pet.getXP();
+		final int petHP = pet.getHP();
+		final int petBaseHP = pet.getBaseHP();
+		final int petAtk = pet.getAtk();
+		final int petDef = pet.getDef();
+		final int petWeight = pet.getWeight();
 
+		final String characteristics = new String(petType + " " + petName + " " + petXP + " " + petHP + " " + petBaseHP + " " + petAtk + " " + petDef + " " + petWeight);
 		if (zone.isTeleportInAllowed(player.getX(), player.getY())) {
 			final Item summonPetScroll = SingletonRepository.getEntityManager().getItem(
 					"summon pet scroll");
-			summonPetScroll.setInfoString(petName);
+			summonPetScroll.setInfoString(characteristics);
 			player.equipOrPutOnGround(summonPetScroll);
 
-			final Pet pet = player.getPet();
+			
 
 			if (pet != null) {
-				PetOwner pO = new PetOwner(player);
-				pO.destroy();
-				//pO.setPet(pet);
-				//pO.removePet(pet);
+				//petOwner.storePet(pet);
 				player.removePet(pet);
-				//pet.getZone().remove(pet);
+				pet.getZone().remove(pet);				
 				player.sendPrivateText("Amazingly your pet melds with the scroll. It just walked right into the page!");
 			}
 
