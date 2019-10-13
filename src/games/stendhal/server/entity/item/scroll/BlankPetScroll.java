@@ -46,7 +46,7 @@ public class BlankPetScroll extends Scroll {
 	 * @return always true
 	 */
 	@Override
-	public boolean useScroll(final Player player) {
+	protected boolean useScroll(final Player player) {
 		final StendhalRPZone zone = player.getZone();
 		final Pet pet = player.getPet();
 		
@@ -68,7 +68,7 @@ public class BlankPetScroll extends Scroll {
 
 			
 
-			if (pet != null) {
+			if (player.getPet() != null) {
 				//petOwner.storePet(pet);
 				player.removePet(pet);
 				pet.getZone().remove(pet);				
