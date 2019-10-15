@@ -91,7 +91,6 @@ public class EmotionCrystals extends AbstractQuest {
 	@Override
 	public List<String> getHistory(final Player player) {
 		final List<String> res = new ArrayList<String>();
-		//this.player = player;
 		if (!player.hasQuest(QUEST_SLOT)) {
 			return res;
 		}
@@ -109,15 +108,7 @@ public class EmotionCrystals extends AbstractQuest {
 
 		//List<String> gatheredCrystals = new ArrayList<String>();
 		boolean hasAllCrystals = true;
-/*
-		for (String color : crystalColors) {
-			if (player.isEquipped(color + " emotion crystal")) {
-				gatheredCrystals.add(color + " emotion crystal");
-			} else {
-				hasAllCrystals = false;
-			}
-		}
-*/
+
 		for (String color : crystalColors) {
 			if (player.isEquipped(color + " emotion crystal")) {
 				if (!gatheredCrystals.contains(color)) {
@@ -371,7 +362,7 @@ public class EmotionCrystals extends AbstractQuest {
 					"There is a soldier in Ados who used some beautiful crystals in jewellery for his wife...",
 					null);
 		}
-		//getHistory(player);
+		
 	}
 
 

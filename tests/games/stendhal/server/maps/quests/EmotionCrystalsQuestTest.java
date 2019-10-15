@@ -76,9 +76,6 @@ public class EmotionCrystalsQuestTest extends ZonePlayerAndNPCTestImpl {
 		assertEquals("Thank you. I would like to gather five #emotion #crystals as a gift for my wife. Please find all that you can and bring them to me.", getReply(npc));
 		en.step(player, "bye");
 		// Quest is now started
-		
-		//en.step(player, "hi");
-		//assertEquals("Hello stranger, nice to meet you.", getReply(npc));
 	}
 	
 	// MAIN TEST
@@ -100,20 +97,12 @@ public class EmotionCrystalsQuestTest extends ZonePlayerAndNPCTestImpl {
 		// Check quest state shows this..
 		// Use EmotionCrystals.getHistory - which returns a list 'res'
 		List<String> res = myEmotionQuest.getHistory(player);
-		assertEquals("I have found the following crystals: blue emotion crystal", res.get(res.size() - 1));
+		assertEquals("I have found the following crystals: blue", res.get(res.size() - 1));
 		// remove the item from the bag
 		player.drop("blue emotion crystal", 1);
 		// now check that the log is still showing that we have 'found' the crystals
 		res = myEmotionQuest.getHistory(player);
-		assertEquals("I have found the following crystals: blue emotion crystal", res.get(res.size() - 1));
-		
-				
-		// Put a call to update getHistory at the end of prepareRiddlesStep
-		// Put logic in getHistory..
-		
-		
+		assertEquals("I have found the following crystals: blue", res.get(res.size() - 1));		
 	}
-	
-
 	
 }
