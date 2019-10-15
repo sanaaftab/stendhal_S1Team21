@@ -42,6 +42,12 @@ public class BabyDragonTest {
 	 * Tests for babyDragon.
 	 */
 	@Test
+	public void testWeightBabyDragon() {
+		final BabyDragon dragon = new BabyDragon();
+		assertThat(dragon.getWeight(), is(1));
+	}// testWeightBabyDragon
+	
+	@Test
 	public void testBabyDragon() {
 		final BabyDragon drako = new BabyDragon();
 		assertThat(drako.getFoodNames(), is(foods));

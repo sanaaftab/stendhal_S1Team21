@@ -96,7 +96,7 @@ public class RainbowBeansTest {
 		en.step(player, "deal");
 		assertEquals("Nosy, aint yer? I deal in rainbow beans. You take some, and who knows where the trip will take yer. It'll cost you 2000 money. And remember pal, it can end up faster than ya wanted! Risky business ya know! So, want to buy some?", getReply(npc));
 		en.step(player, "no");
-		assertEquals("Aight, ain't for everyone. Anythin else you want, you say so.", getReply(npc));
+		assertEquals("Alright, ain't for everyone. Anythin else you want, you say so.", getReply(npc));
 		en.step(player, "help");
 		assertEquals("To be honest mate I can't help you with much, you're better off in the city for that.", getReply(npc));
 		en.step(player, "quest");
@@ -135,6 +135,9 @@ public class RainbowBeansTest {
 		assertFalse(player.isEquipped("money"));
 
 		assertNotNull(player.getQuest(questSlot));
+		
+
+
 
 		// return too soon
 		en.step(player, "hi");
@@ -148,7 +151,7 @@ public class RainbowBeansTest {
 		en.step(player, "hi");
 		assertEquals("Oi, you. Back for more rainbow beans?", getReply(npc));
 		en.step(player, "no");
-		assertEquals("Aight, ain't for everyone. Anythin else you want, you say so.", getReply(npc));
+		assertEquals("Alright, ain't for everyone. Anythin else you want, you say so.", getReply(npc));
 		en.step(player, "bye");
 		assertEquals("Bye.", getReply(npc));
 
@@ -180,4 +183,6 @@ public class RainbowBeansTest {
 		assertEquals("You were just sick from overuse of the rainbow beans. Classy!", PlayerTestHelper.getPrivateReply(player));
 		assertFalse("Beans should be used up", player.isEquipped("rainbow beans"));
 	}
+	
+
 }
