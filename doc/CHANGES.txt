@@ -1,6 +1,18 @@
 Changelog
 ---------
 ---------
+1.31
+*fixes*
+- summon pet scroll remembers pet attributes
+- fishmonger now sells red lion fish
+- mithril clasp now goes on keyring
+- travel log for emotion crystals records found crystals properly
+- items on keyring now stack correctly
+- baby dragons now have weight
+- rainbow bean NPC now speaks correctly
+
+
+
 1.30
 *world*
 - added Deniran Caves

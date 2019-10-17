@@ -167,6 +167,14 @@ Authors of Stendhal are:
   · Bugs fixer
   - Diligent Dodo (aka Soniccuz)
   · Artist (mimic, dodo, suba diving concepts)
+  James Evennett
+  Cristina Perea del Olmo
+  Shauryan Gautam
+  Arina Belova
+  Ilinca Ion
+  Albert Viilik
+  Sana Aftab
+
 
 We also thank many who have contributed to Stendhal by providing patches,
 which the rest of the team commited on their behalf. 
