@@ -15,8 +15,12 @@ package games.stendhal.server.actions.equip;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Iterator;
+
+import org.hamcrest.Matcher;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -24,10 +28,12 @@ import games.stendhal.common.EquipActionConsts;
 import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.entity.item.Item;
+import games.stendhal.server.entity.item.StackableItem;
 import games.stendhal.server.entity.player.Player;
 import games.stendhal.server.maps.MockStendlRPWorld;
 import marauroa.common.game.RPAction;
 import marauroa.common.game.RPObject;
+import marauroa.common.game.RPSlot;
 import utilities.PlayerTestHelper;
 import utilities.RPClass.ItemTestHelper;
 
@@ -249,6 +255,74 @@ public class SourceObjectTest {
 		final SourceObject so = SourceObject.createSourceObject(action, bob);
 		assertTrue(so.isValid());
 		assertEquals("too many are reduced to all", dropitem.getQuantity(), so.getQuantity());
+	}
+	
+	@Test
+	public void luckyCharmsCanFillKeyring() {
+		
+		
+		final Player bob = PlayerTestHelper.createPlayer("bob");
+		final StendhalRPZone zone = new StendhalRPZone("dropzone");
+		zone.add(bob);
+		//final Item dropitem = ItemTestHelper.createItem("luckyCharm", 2);
+		
+		MockStendlRPWorld.get().addRPZone(zone);
+		RPSlot keyring = bob.getSlot("keyring");
+		StackableItem luckycharm = (StackableItem)SingletonRepository.getEntityManager().getItem("lucky charm");
+		bob.equip("keyring", luckycharm);
+		Iterator<RPObject> slots = keyring.iterator();
+		while (slots.hasNext())
+				{
+					StackableItem it = (StackableItem)slots.next();
+					boolean isItemLuckyCharm = it.getName() == "lucky charm";
+					assertTrue(isItemLuckyCharm);
+					
+				
+		
+		//Iterator<RPObject> slots = keyring.iterator();
+		//while (slots.hasNext())
+	//	{
+	//		StackableItem it = (StackableItem)slots.next();
+	//		boolean isItemLuckyCharm = it.getName() == "lucky charm";
+	//		assertTrue(isItemLuckyCharm);
+			
+		
+		}
+	}
+	
+	@Test
+	public void luckyCharmsInKeyRingUnstackable()
+	{
+		final Player bob = PlayerTestHelper.createPlayer("bob");
+		final StendhalRPZone zone = new StendhalRPZone("dropzone");
+		zone.add(bob);
+		MockStendlRPWorld.get().addRPZone(zone);
+		
+		StackableItem luckycharm = (StackableItem)SingletonRepository.getEntityManager().getItem("lucky charm");
+//		luckycharm.setQuantity(5);
+		bob.equip("bag", luckycharm);
+		EquipmentAction action = new EquipAction();
+		RPAction equip = new RPAction();
+		equip.put("type", "equip");
+		equip.put(EquipActionConsts.BASE_OBJECT, bob.getID().getObjectID());
+		equip.put(EquipActionConsts.BASE_SLOT,"bag");
+		equip.put(EquipActionConsts.BASE_ITEM, bob.getID().getObjectID());
+		equip.put(EquipActionConsts.TARGET_OBJECT, bob.getID().getObjectID());
+		equip.put(EquipActionConsts.TARGET_SLOT, "keyring");
+		action.onAction(bob, equip);
+		
+		RPSlot keyring = bob.getSlot("keyring");
+		Iterator<RPObject> slots = keyring.iterator();
+		while (slots.hasNext())
+				{
+					StackableItem it = (StackableItem)slots.next();
+					//boolean isItemLuckyCharm = it.getName() == "lucky charm";
+					//boolean isItemNotStacked = it.getQuantity()==1 ;
+					//assertTrue(isItemLuckyCharm);
+					assertEquals(1, bob.getTotalNumberOf("lucky charms"));
+					
+				}
+		
 	}
 
 

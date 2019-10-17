@@ -316,6 +316,30 @@ class SourceObject extends MoveableObject {
 			logger.warn("tried to equip an entity into disallowed slot: " + item.getClass() + "; equip rejected");
 			return false;
 		}
+		
+		//attempt 1 
+		String destObject = dest.getContentSlotName();
+		String sourceObj = this.getEntityName();
+		boolean isKeyRing = destObject.equals("keyring");
+		boolean isLuckyCharm = sourceObj.equals("lucky charm");
+		player.sendPrivateText("check");
+	
+	
+		
+		if(isKeyRing && isLuckyCharm)
+		{	//EntitySlot slot = new EntitySlot("slotname", destObject);
+			//slot.setCapacity(1);
+			//this.quantity = 1;
+			this.quantity = 1;
+			
+			
+			//((StackableItem) item).
+		}
+
+
+
+		player.sendPrivateText("check2");
+		
 
 		if (!dest.isValid() || !dest.preCheck(item, player)) {
 			// no extra logger warning needed here as each is inside the methods called above, where necessary
@@ -332,6 +356,9 @@ class SourceObject extends MoveableObject {
 
 		return true;
 	}
+		
+		
+		//----------------------------------------------------------------------------------------------------------------------------
 
 	/** returns true when this SourceObject is valid. */
 	@Override
