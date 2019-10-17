@@ -318,6 +318,7 @@ class SourceObject extends MoveableObject {
 		}
 		
 		//attempt 1 
+		/*
 		String destObject = dest.getContentSlotName();
 		String sourceObj = this.getEntityName();
 		boolean isKeyRing = destObject.equals("keyring");
@@ -339,10 +340,16 @@ class SourceObject extends MoveableObject {
 
 
 		player.sendPrivateText("check2");
+		*/
 		
 
 		if (!dest.isValid() || !dest.preCheck(item, player)) {
 			// no extra logger warning needed here as each is inside the methods called above, where necessary
+			return false;
+		}
+		
+		if(dest.getContentSlotName().equals("keyring")&& this.getEntityName().equals("lucky charm")&&this.getQuantity()>1)
+		{
 			return false;
 		}
 
