@@ -31,13 +31,13 @@ public class RentStallNPCTest extends ZonePlayerAndNPCTestImpl {
 		final Engine en = npc.getEngine();
 
 		assertTrue(en.step(player, "hi"));
-		assertEquals("Hello there, welcome to the Deniran Castle!.", getReply(npc));
+		assertEquals("Hello there, welcome to the Deniran Castle!", getReply(npc));
 
 		assertTrue(en.step(player, "job"));
 		assertEquals("Interested in selling your items?", getReply(npc));
 
 		assertTrue(en.step(player, "bye"));
-		assertEquals("Alright, see you around. ", getReply(npc));
+		assertEquals("Byeeeee ", getReply(npc));
 
 	}
 
