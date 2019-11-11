@@ -19,7 +19,7 @@ public class RentStallNPCTest extends ZonePlayerAndNPCTestImpl {
 	}
 	
 	public RentStallNPCTest() {
-		setNpcNames("Salinca");
+		setNpcNames("Steve");
 		setZoneForPlayer("int_deniran_castle");
 		addZoneConfigurator(new  RentStallNPC(),"int_deniran_castle");
 	}
@@ -27,7 +27,7 @@ public class RentStallNPCTest extends ZonePlayerAndNPCTestImpl {
 	@Test
 	public void test() {
 		
-		final SpeakerNPC npc = getNPC("Salinca");
+		final SpeakerNPC npc = getNPC("Steve");
 		final Engine en = npc.getEngine();
 
 		assertTrue(en.step(player, "hi"));
@@ -37,7 +37,7 @@ public class RentStallNPCTest extends ZonePlayerAndNPCTestImpl {
 		assertEquals("Interested in selling your items?", getReply(npc));
 
 		assertTrue(en.step(player, "bye"));
-		assertEquals("Byeeeee ", getReply(npc));
+		assertEquals("Byeeeee.", getReply(npc));
 
 	}
 
