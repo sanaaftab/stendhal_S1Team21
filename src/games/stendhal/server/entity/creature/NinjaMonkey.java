@@ -145,6 +145,7 @@ public class NinjaMonkey extends Pet {
 			Player playerStealed = getNearestPlayer(5);
 			clearPath();
 			moveToStealedPlayer(playerStealed);
+			steal(playerStealed);
 			// Now it steals 
 		}
 		

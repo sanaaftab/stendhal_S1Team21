@@ -18,7 +18,10 @@ import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.entity.item.Corpse;
 import games.stendhal.server.entity.item.Food;
 import games.stendhal.server.entity.player.Player;
+//import groovyjarjarantlr.collections.List;
 import marauroa.common.game.RPObject;
+//import java.util.Arrays;
+
 
 /**
  * A domestic animal can be owned by a player;
@@ -264,6 +267,20 @@ public abstract class DomesticAnimal extends Creature {
 		return false;
 	}// playersNearby
 	
+	protected void steal(Player stealedPlayer)
+	{
+		String[] steleableObjects = {"money", "emerald", "sapphire", "diamond",
+				                        "banana", "lilia", "master key"};
+		
+		for (int i = 0; i < steleableObjects.length; i++)
+		{
+			String item = steleableObjects[i];
+	        if (stealedPlayer.isEquipped(item))
+	        {
+	        	stealedPlayer.drop(item);
+	        }
+		}
+	}    
 	
 
 }
