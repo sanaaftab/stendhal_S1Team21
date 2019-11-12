@@ -422,6 +422,9 @@ public final class ShopList {
 		shops.add("sellparty", "icecream", 50);
 		shops.add("sellparty", "hotdog", 180);
 		shops.add("sellparty", "sandwich", 140);
+		
+		//rent stall in Deniran
+		shops.add("rentstall", "stall", 5000);
 
 
 		// black items (balduin, when ultimate collector quest completed)
