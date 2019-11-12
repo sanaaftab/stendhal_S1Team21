@@ -42,3 +42,5 @@ public class RentStallNPCTest extends ZonePlayerAndNPCTestImpl {
 	}
 
 }
+
+
