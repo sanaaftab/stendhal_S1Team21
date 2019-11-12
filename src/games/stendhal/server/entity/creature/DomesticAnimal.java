@@ -42,7 +42,7 @@ public abstract class DomesticAnimal extends Creature {
 	 * The player who owns the domestic animal, or null if the animal is wild.
 	 */
 	protected Player owner;
-	protected Player stealedPlayer;
+	// protected Player stealedPlayer;
 
 	/**
 	 * Creates a new wild DomesticAnimal.
@@ -162,7 +162,8 @@ public abstract class DomesticAnimal extends Creature {
 		// setAsynchonousMovement(owner,0,0);
 	}
 	
-	protected void moveToStealedPlayer() {
+	// moves pet to player from which pet will steal
+	protected void moveToStealedPlayer(Player stealedPlayer) {
 		logger.debug("Domestic animal (stealedPlayer) moves to player");
 		setIdea("follow");
 		setMovement(stealedPlayer, 0, 0, getMovementRange());
@@ -223,7 +224,10 @@ public abstract class DomesticAnimal extends Creature {
     	return false;
     }
 	
-	private Player getNearestPlayer(final double range) {
+	
+	// Checks who is the nearest player and returns it
+	// Returns null when no nearby player in given range
+	public Player getNearestPlayer(final double range) {
 		final int x = getX();
 		final int y = getY();
 
@@ -234,7 +238,8 @@ public abstract class DomesticAnimal extends Creature {
 		for (final Player player : getZone().getPlayers()) {
 			final int px = player.getX();
 			final int py = player.getY();
-
+            
+			if (player != this.getOwner()) {
 			if ((Math.abs(px - x) < range) && (Math.abs(py - y) < range)) {
 				final int squaredDistanceOfThisPlayer =
 						(px - x) * (px - x) + (py - y) * (py - y);
@@ -243,17 +248,22 @@ public abstract class DomesticAnimal extends Creature {
 					squaredDistanceOfNearestPlayer = squaredDistanceOfThisPlayer;
 					nearest = player;
 				}
-			}
+			}}
 		}
 
 		return nearest;
-	}
+	}// getNearestPlayer
 	
+	
+	// Calls getNearestPlayer in a range of 5 squares
+	// returns false when no player found else returns true
 	protected boolean playersNearby() {
-		if (getNearestPlayer(17) != null) {
+		if (getNearestPlayer(5) != null) {
 			return true;
 		}
 		return false;
-	}
+	}// playersNearby
+	
+	
 
 }
