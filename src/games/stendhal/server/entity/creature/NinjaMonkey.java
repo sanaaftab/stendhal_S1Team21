@@ -149,8 +149,8 @@ public class NinjaMonkey extends Pet {
 			// Now it steals 
 		}
 		
-		this.applyMovement();
-		notifyWorldAboutChanges();
+		//this.applyMovement();
+		//notifyWorldAboutChanges();
 		}
 
  
