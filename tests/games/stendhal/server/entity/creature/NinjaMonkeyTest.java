@@ -12,8 +12,12 @@
  ***************************************************************************/
 package games.stendhal.server.entity.creature;
 
+//import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 //import static org.junit.Assert.assertFalse;
+//import static org.junit.Assert.assertThat;
+
+import org.junit.BeforeClass;
 
 //import static org.junit.Assert.assertTrue;
 
@@ -27,10 +31,24 @@ import games.stendhal.server.maps.MockStendlRPWorld;
 //import marauroa.common.Log4J;
 //import marauroa.common.game.RPObject;
 import utilities.PlayerTestHelper;
-
+import utilities.RPClass.NinjaMonkeyTestHelper;
 
 public class NinjaMonkeyTest {
+	
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception 
+	{
+		NinjaMonkeyTestHelper.generateRPClasses();
+		MockStendlRPWorld.get();
+	}
 
+	// Tests for Ninja Monkey:
+	
+	// Tests Ninja Monkey exists 
+	@Test
+	public void testNinjaMonkey() {
+		new NinjaMonkey();
+	}
 	
 	@Test
 	public void testNinjaMonkeyExist() {
@@ -46,6 +64,18 @@ public class NinjaMonkeyTest {
 
 	}
 
+	// Tests for Ninja Monkey Player
 	
+	// Tests Ninja Monkey can have an owner
+	@Test
+	public void testNinjaMonkeyPlayer() {
+
+		final StendhalRPZone zone = new StendhalRPZone("zone");
+		final Player jaime = PlayerTestHelper.createPlayer("jaime");
+		zone.add(jaime);
+		final NinjaMonkey ninjaChicken = new NinjaMonkey(jaime);
+
+		assertEquals(jaime, ninjaChicken.getOwner());
+	}
 
 }
