@@ -42,6 +42,7 @@ public abstract class DomesticAnimal extends Creature {
 	 * The player who owns the domestic animal, or null if the animal is wild.
 	 */
 	protected Player owner;
+	protected Player stealedPlayer;
 
 	/**
 	 * Creates a new wild DomesticAnimal.
@@ -160,6 +161,12 @@ public abstract class DomesticAnimal extends Creature {
 		setMovement(owner, 0, 0, getMovementRange());
 		// setAsynchonousMovement(owner,0,0);
 	}
+	
+	protected void moveToStealedPlayer() {
+		logger.debug("Domestic animal (stealedPlayer) moves to player");
+		setIdea("follow");
+		setMovement(stealedPlayer, 0, 0, getMovementRange());
+	}
 
 	/**
 	 * Can be called when the sheep dies. Puts meat onto its corpse; the amount
@@ -215,5 +222,38 @@ public abstract class DomesticAnimal extends Creature {
 
     	return false;
     }
+	
+	private Player getNearestPlayer(final double range) {
+		final int x = getX();
+		final int y = getY();
+
+		Player nearest = null;
+
+		int squaredDistanceOfNearestPlayer = Integer.MAX_VALUE;
+
+		for (final Player player : getZone().getPlayers()) {
+			final int px = player.getX();
+			final int py = player.getY();
+
+			if ((Math.abs(px - x) < range) && (Math.abs(py - y) < range)) {
+				final int squaredDistanceOfThisPlayer =
+						(px - x) * (px - x) + (py - y) * (py - y);
+
+				if (squaredDistanceOfThisPlayer < squaredDistanceOfNearestPlayer) {
+					squaredDistanceOfNearestPlayer = squaredDistanceOfThisPlayer;
+					nearest = player;
+				}
+			}
+		}
+
+		return nearest;
+	}
+	
+	protected boolean playersNearby() {
+		if (getNearestPlayer(17) != null) {
+			return true;
+		}
+		return false;
+	}
 
 }

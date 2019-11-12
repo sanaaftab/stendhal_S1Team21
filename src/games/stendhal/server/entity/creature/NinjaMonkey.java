@@ -17,6 +17,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+//import games.stendhal.common.Rand;
+//import games.stendhal.server.core.events.TurnListener;
+//import games.stendhal.server.core.events.TurnNotifier;
 import games.stendhal.server.entity.player.Player;
 import marauroa.common.game.RPClass;
 import marauroa.common.game.RPObject;
@@ -130,5 +133,88 @@ public class NinjaMonkey extends Pet {
 		return false;
 	}
 
+	
+	
+	/*
 
+	@Override
+	public void logic() {
+		super.logic();
+
+		if (!isEnemyNear(getPerceptionRange()) && (owner == null)) {
+			// if noone near and noone owns us ....
+			stop();
+			notifyWorldAboutChanges();
+			return;
+		}
+		setPath(null);
+		setIdea(null);
+		if (weight < MAX_WEIGHT) {
+			increaseHunger();
+		} else if (Rand.rand(FAT_FACTOR) == 1) {
+			increaseHunger();
+		}
+
+		//fight whatever owner is targeting
+		if (System.getProperty("stendhal.petleveling", "false").equals("true")
+				&& takesPartInCombat() && (owner != null)
+				&& (owner.getAttackTarget() != null)) {
+			myTarget = owner.getAttackTarget();
+			this.setTarget(myTarget);
+			this.setIdea("agressive");
+
+			if (!nextTo(myTarget)) {
+				clearPath();
+				this.setMovement(myTarget, 0, 0, this.getMovementRange());
+			}
+		}
+
+
+		if ((this.getLevel() >= this.getLVCap()) && canGrow()) {
+
+			// Postpone growing to the next turn because it may involve
+			// removing this NPC-entity from the zone and adding a
+			// different one.
+			// But we are called from within a for-loop over all NPC-entity
+			// in StendhalRPZone.logic, so we may not modify that list
+			TurnNotifier.get().notifyInTurns(1, new TurnListener() {
+
+				@Override
+				public void onTurnReached(int currentTurn) {
+					grow();
+				}
+			});
+		}
+
+		//drinking logic
+		boolean busyWithHealing = false;
+		if (getHP() < getBaseHP()) {
+			busyWithHealing = logicHealing();
+		}
+
+		if (!busyWithHealing) {
+			if (hunger > HUNGER_HUNGRY) {
+				logicEating();
+			} else if (this.getIdea() == "agressive") {
+				if (myTarget == null)
+				{
+					this.setIdea(null);
+				}
+				this.setMovement(myTarget, 0, 0, this.getMovementRange());
+			} else {
+				logicStandard(null);
+			}
+		}
+
+		// bring the pet to the owner if he/she calls it
+		if (isOwnerCallingMe()) {
+			clearPath();
+			moveToOwner();
+		}
+
+		this.applyMovement();
+		notifyWorldAboutChanges();
+	}
+
+    */
 }
