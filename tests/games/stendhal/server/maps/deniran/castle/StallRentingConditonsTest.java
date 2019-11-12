@@ -47,7 +47,7 @@ public class StallRentingConditonsTest {
 
 	@After
 	public void tearDown() {
-		PlayerTestHelper.removeNPC("Salinca");
+		PlayerTestHelper.removeNPC("Steve");
 	}
 
 	@Test
@@ -57,31 +57,29 @@ public class StallRentingConditonsTest {
 		assertNotNull(npc);
 		en = npc.getEngine();
 
-        //player has not met the conditions
-		en.step(player, "hi");
-		assertEquals("Hello there, welcome to the Deniran Castle!", getReply(npc));
-		en.step(player, "job");
-		assertEquals("Interested in selling your items?", getReply(npc));
-		en.step(player, "yes");
-		assertEquals("You don't have the cash. Come back later.", getReply(npc));
-		en.step(player, "bye");
-		assertEquals("Byeeeee.", getReply(npc));
-
-		// player was too low level last time. make them at least level 20
-		//player.addXP(99520);
-		//assertThat(player.getLevel(), greaterThanOrEqualTo(20));
-
-		// not interested at first
+        //player is not interested
 		en.step(player, "hi");
 		assertEquals("Hello there, welcome to the Deniran Castle!", getReply(npc));
 		en.step(player, "job");
 		assertEquals("Interested in selling your items?", getReply(npc));
 		en.step(player, "no");
-		assertEquals("OK... rude. Can I help you with anything else?", getReply(npc));
+		assertEquals("Ok then. Have a good day!", getReply(npc));
+		en.step(player, "bye");
+		assertEquals("Byeeeee.", getReply(npc));
+
+		// player finds out info but does not want to buy
+		en.step(player, "hi");
+		assertEquals("Hello there, welcome to the Deniran Castle!", getReply(npc));
+		en.step(player, "job");
+		assertEquals("Interested in selling your items?", getReply(npc));
+		en.step(player, "yes");
+		assertEquals("You can rent a stall if you want. just say #buy #stall.", getReply(npc));
 		en.step(player, "help");
 		assertEquals("To rent a stall for 6 months you need to be at least level 20, have 5000 coins in your inventory and have at lest 30 items", getReply(npc));
-		en.step(player, "quest");
-		assertEquals("Sorry, I have no quest for you", getReply(npc));
+		en.step(player, "buy");
+		assertEquals("A stall will cost 5000. Do you want to buy it?", getReply(npc));
+		en.step(player, "no");
+		assertEquals("Ok, how else may I help you?", getReply(npc));
 		en.step(player, "bye");
 		assertEquals("Byeeeee.", getReply(npc));
 
@@ -95,7 +93,11 @@ public class StallRentingConditonsTest {
 		en.step(player, "job");
 		assertEquals("Interested in selling your items?", getReply(npc));
 		en.step(player, "yes");
-		assertEquals("You don't have the cash. Come back later", getReply(npc));
+		assertEquals("You can rent a stall if you want. just say #buy #stall.", getReply(npc));
+		en.step(player, "buy");
+		assertEquals("A stall will cost 5000. Do you want to buy it?", getReply(npc));
+		en.step(player, "yes");
+		assertEquals("Sorry, you don't have enough money!", getReply(npc));
 		en.step(player, "bye");
 		assertEquals("Byeeeee.", getReply(npc));
 
@@ -103,33 +105,22 @@ public class StallRentingConditonsTest {
 		
 		PlayerTestHelper.equipWithMoney(player, 5000);
 		
-		//not enough items
-		
-
-		//en.step(player, "hi");
-		//assertEquals("Hello there, welcome to the Deniran Castle!", getReply(npc));
-		//en.step(player, "job");
-		//assertEquals("Interested in selling your items?", getReply(npc));
-		//en.step(player, "yes");
-		//assertEquals("Your items are not that impressive, come back when you have more (30)", getReply(npc));
-		//en.step(player, "bye");
-		//assertEquals("Byeeeee.", getReply(npc));
-
-
-	
-		//PlayerTestHelper.equipWithStackableItem(player, "wood", 30);
-		
-        //players has everything required (just money)
+        //players has everything required
 		
 		en.step(player, "hi");
 		assertEquals("Hello there, welcome to the Deniran Castle!", getReply(npc));
 		en.step(player, "job");
 		assertEquals("Interested in selling your items?", getReply(npc));
 		en.step(player, "yes");
-		assertEquals("Alright, your stall will apear in the Deniran main square. It will be handled by a shopkeeper.", getReply(npc));
+		assertEquals("You can rent a stall if you want. just say #buy #stall.", getReply(npc));
+		en.step(player, "buy");
+		assertEquals("A stall will cost 5000. Do you want to buy it?", getReply(npc));
+		en.step(player, "yes");
+		assertEquals("Congratulations! Here is your stall!", getReply(npc));
+		assertFalse(player.isEquipped("money"));
+
 		en.step(player, "bye");
 		assertEquals("Byeeeee.", getReply(npc));
-		assertFalse(player.isEquipped("money"));
 
 	}
 

@@ -1,25 +1,24 @@
 package games.stendhal.server.maps.deniran.castle;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import games.stendhal.server.core.config.ZoneConfigurator;
+import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.core.engine.StendhalRPZone;
-
-import java.util.LinkedList;
-import java.util.List;
-
 import games.stendhal.server.core.pathfinder.FixedPath;
 import games.stendhal.server.core.pathfinder.Node;
+import games.stendhal.server.entity.npc.ShopList;
 import games.stendhal.server.entity.npc.SpeakerNPC;
 //import games.stendhal.server.entity.npc.behaviour.adder.BuyerAdder;
 import games.stendhal.server.entity.npc.behaviour.adder.SellerAdder;
 //import games.stendhal.server.entity.npc.behaviour.impl.BuyerBehaviour;
 import games.stendhal.server.entity.npc.behaviour.impl.SellerBehaviour;
-import games.stendhal.server.core.engine.SingletonRepository;
-import games.stendhal.server.entity.npc.ShopList;
 
 
 public class RentStallNPC implements ZoneConfigurator {
+
 	private final ShopList shops = SingletonRepository.getShopList();
 
 	@Override
@@ -46,8 +45,8 @@ public class RentStallNPC implements ZoneConfigurator {
 			protected void createDialog() {
 				addGreeting("Hello there, welcome to the Deniran Castle!");
 				addJob("Interested in selling your items?");
-				addReply("yes", "You can rent a stall, the price is only #5000 #coins");
-				addReply("no", "Ok the. Have a good day!");
+				addReply("yes", "You can rent a stall if you want. just say #buy #stall.");
+				addReply("no", "Ok then. Have a good day!");
 				new SellerAdder().addSeller(this, new SellerBehaviour(shops.get("rentstall")), false);
 				addHelp("To rent a stall for 6 months you need to be at least level 20, have 5000 coins in your inventory and have at lest 30 items");
 				addGoodbye("Byeeeee.");

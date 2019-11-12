@@ -26,7 +26,8 @@ import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
 //import games.stendhal.server.entity.npc.EventRaiser;
 import games.stendhal.server.entity.npc.SpeakerNPC;
-import games.stendhal.server.entity.npc.action.DropItemAction;
+// import games.stendhal.server.entity.npc.action.DropItemAction;
+import games.stendhal.server.entity.npc.condition.NotCondition;
 //import games.stendhal.server.entity.npc.action.EquipItemAction;
 //import games.stendhal.server.entity.npc.action.MultipleActions;
 //import games.stendhal.server.entity.npc.action.SayTimeRemainingAction;
@@ -44,7 +45,7 @@ import games.stendhal.server.entity.player.Player;
 
 public class RentStall extends AbstractQuest {
 
-    public static final String QUEST_SLOT = "rent stall";
+    public static final String QUEST_SLOT = "rent_stall";
     public static final int REQUIRED_MONEY = 5000;
 
     @Override
@@ -63,40 +64,51 @@ public class RentStall extends AbstractQuest {
         return res;
     }
     
+    @Override
+	public String getNPCName() {
+		return "Steve";
+	}
+    
     public void prepareQuestStep() {
 
         // get a reference to the npc
-        SpeakerNPC npc = npcs.get("Steve");
-
-        // add a reply on the trigger phrase "rent" to Hayunn
-        npc.addReply("rent", "Oh are you interested in renting a stall?");
-        
-     // if the player asks for a quest, go to state QUEST_OFFERED
-        npc.add(ConversationStates.ATTENDING,
-            ConversationPhrases.QUEST_MESSAGES, 
-            null,
-            ConversationStates.QUEST_OFFERED, 
-            "Well let's see if you have what you need",
-            null);
-        
-     // in state QUEST_OFFERED, accept "no" and go back to ATTENDING
-        npc.add(
-            ConversationStates.QUEST_OFFERED,
-            ConversationPhrases.NO_MESSAGES,
-            null,
-            ConversationStates.ATTENDING,
-            "I'll see you around then",
-            null);
-        
-        npc.add(ConversationStates.QUEST_OFFERED,
-				ConversationPhrases.YES_MESSAGES,
-				new PlayerHasItemWithHimCondition("money", REQUIRED_MONEY),
-				ConversationStates.ATTENDING,
-				"Alright. Your stall will show up in Deniran square and wll be managed by a shopkeeper",
-				null);
-				new DropItemAction("money", REQUIRED_MONEY);
-		
-				     
+    	final SpeakerNPC npc = npcs.get("Steve");
+    	
+    	// player wants to take the beans but hasn't the money
+		npc.add(ConversationStates.QUEST_OFFERED,
+			ConversationPhrases.YES_MESSAGES,
+			new NotCondition(new PlayerHasItemWithHimCondition("money", REQUIRED_MONEY)),
+			ConversationStates.ATTENDING,
+			"You don't have the cash. Come back later.",
+			null);
+    	
+//        
+//     // if the player asks for a quest, go to state QUEST_OFFERED
+//        npc.add(ConversationStates.ATTENDING,
+//            ConversationPhrases.QUEST_MESSAGES, 
+//            null,
+//            ConversationStates.QUEST_OFFERED, 
+//            "Well let's see if you have what you need",
+//            null);
+//        
+//     // in state QUEST_OFFERED, accept "no" and go back to ATTENDING
+//        npc.add(
+//            ConversationStates.QUEST_OFFERED,
+//            ConversationPhrases.NO_MESSAGES,
+//            null,
+//            ConversationStates.ATTENDING,
+//            "I'll see you around then",
+//            null);
+//        
+//        npc.add(ConversationStates.QUEST_OFFERED,
+//				ConversationPhrases.YES_MESSAGES,
+//				new PlayerHasItemWithHimCondition("money", REQUIRED_MONEY),
+//				ConversationStates.ATTENDING,
+//				"Alright. Your stall will show up in Deniran square and wll be managed by a shopkeeper",
+//				null);
+//				new DropItemAction("money", REQUIRED_MONEY);
+//		
+//				     
     }
     
     @Override
