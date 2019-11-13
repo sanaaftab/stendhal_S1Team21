@@ -14,17 +14,19 @@ package games.stendhal.server.entity.creature;
 
 //import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
-//import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertFalse;
 //import static org.junit.Assert.assertThat;
 
 import org.junit.BeforeClass;
 
-//import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import games.stendhal.server.core.engine.SingletonRepository;
 //import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.core.engine.StendhalRPZone;
+import games.stendhal.server.entity.item.StackableItem;
 //import games.stendhal.server.entity.mapstuff.spawner.SheepFood;
 import games.stendhal.server.entity.player.Player;
 import games.stendhal.server.maps.MockStendlRPWorld;
@@ -77,5 +79,32 @@ public class NinjaMonkeyTest {
 
 		assertEquals(jaime, ninjaChicken.getOwner());
 	}
+	
+	//Tests for Ninja Monkey steal functionality
+	@Test
+	public void testItemsStolenFromTarget() {
+		// Create a player with a pet and one withit
+		final StendhalRPZone zone = new StendhalRPZone("testzone", 5, 5);
+		final Player jaime = PlayerTestHelper.createPlayer("jaime");
+		final Player jaime2 = PlayerTestHelper.createPlayer("jaime2");
+		StackableItem stolen_item = (StackableItem) SingletonRepository.getEntityManager().getItem("money");
+		stolen_item.setQuantity(1);
+    	jaime.equip("bag", stolen_item);
+		
+		zone.add(jaime);
+		zone.add(jaime2);
+		final NinjaMonkey ninjaChicken = new NinjaMonkey(jaime2);
+		zone.add(ninjaChicken);
+		
+		// Given the 16% chance of stealing each stealable item, this loop will run the logic 25 time, thus making the probability of a successful steal ~100%.
+		for (int i = 0; i <= 150; i++)
+			ninjaChicken.logic();
+
+		
+		// BY this point jaime should have no money and jaime2 should have 1 money.
+		assertFalse(jaime.drop("money", 1));
+		assertTrue(jaime2.drop("money", 1));
+	}
+	
 
 }
