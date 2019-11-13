@@ -14,12 +14,7 @@ package games.stendhal.server.entity.creature;
 
 import java.util.Arrays;
 import java.util.List;
-
 import org.apache.log4j.Logger;
-
-//import games.stendhal.common.Rand;
-//import games.stendhal.server.core.events.TurnListener;
-//import games.stendhal.server.core.events.TurnNotifier;
 import games.stendhal.server.entity.player.Player;
 import marauroa.common.game.RPClass;
 import marauroa.common.game.RPObject;
@@ -98,7 +93,11 @@ public class NinjaMonkey extends Pet {
 		update();
 	}
 	
-	// Temporarily used for testing..
+	/**
+	 * Gives ninja monkey type
+	 * 
+	 * @returns <code>String</code>
+	 */
 	public String getMonkeyType() {
 		return("Im a monkey");
 	}
@@ -136,7 +135,9 @@ public class NinjaMonkey extends Pet {
 
 	
 	
-
+	/**
+	 * Makes ninja monkey steals 
+	 */
 	@Override
 	public void logic() 
 	{

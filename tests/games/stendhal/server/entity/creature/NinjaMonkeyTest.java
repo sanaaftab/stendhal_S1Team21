@@ -12,26 +12,16 @@
  ***************************************************************************/
 package games.stendhal.server.entity.creature;
 
-//import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-//import static org.junit.Assert.assertThat;
-
 import org.junit.BeforeClass;
-
 import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
-
 import games.stendhal.server.core.engine.SingletonRepository;
-//import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.entity.item.StackableItem;
-//import games.stendhal.server.entity.mapstuff.spawner.SheepFood;
 import games.stendhal.server.entity.player.Player;
 import games.stendhal.server.maps.MockStendlRPWorld;
-//import marauroa.common.Log4J;
-//import marauroa.common.game.RPObject;
 import utilities.PlayerTestHelper;
 import utilities.RPClass.NinjaMonkeyTestHelper;
 
@@ -44,9 +34,11 @@ public class NinjaMonkeyTest {
 		MockStendlRPWorld.get();
 	}
 
-	// Tests for Ninja Monkey:
-	
-	// Tests Ninja Monkey exists 
+	/**
+	 * Tests for Ninja Monkey:
+	 *
+	 * Tests Ninja Monkey exists 
+	 */
 	@Test
 	public void testNinjaMonkey() {
 		new NinjaMonkey();
@@ -66,9 +58,11 @@ public class NinjaMonkeyTest {
 
 	}
 
-	// Tests for Ninja Monkey Player
-	
-	// Tests Ninja Monkey can have an owner
+	/**
+	 * Tests for Ninja Monkey Player:
+	 *
+	 * Tests Ninja Monkey can have an owner
+	 */
 	@Test
 	public void testNinjaMonkeyPlayer() {
 
@@ -80,7 +74,9 @@ public class NinjaMonkeyTest {
 		assertEquals(jaime, ninjaChicken.getOwner());
 	}
 	
-	//Tests for Ninja Monkey steal functionality
+	/**
+	 * Tests for Ninja Monkey steal functionality
+	 */
 	@Test
 	public void testItemsStolenFromTarget() {
 		// Create a player with a pet and one withit

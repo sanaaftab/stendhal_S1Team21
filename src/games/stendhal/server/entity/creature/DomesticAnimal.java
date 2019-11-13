@@ -17,12 +17,9 @@ import org.apache.log4j.Logger;
 import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.entity.item.Corpse;
 import games.stendhal.server.entity.item.Food;
-//import games.stendhal.server.entity.item.Item;
 import games.stendhal.server.entity.item.StackableItem;
 import games.stendhal.server.entity.player.Player;
-//import groovyjarjarantlr.collections.List;
 import marauroa.common.game.RPObject;
-//import java.util.Arrays;
 
 
 /**
@@ -47,7 +44,6 @@ public abstract class DomesticAnimal extends Creature {
 	 * The player who owns the domestic animal, or null if the animal is wild.
 	 */
 	protected Player owner;
-	// protected Player stealedPlayer;
 
 	/**
 	 * Creates a new wild DomesticAnimal.
@@ -167,7 +163,10 @@ public abstract class DomesticAnimal extends Creature {
 		// setAsynchonousMovement(owner,0,0);
 	}
 	
-	// moves pet to player from which pet will steal
+	
+	/**
+	 * Moves pet to player from which pet will steal
+	 */
 	protected void moveToStealedPlayer(Player stealedPlayer) {
 		logger.debug("Domestic animal (stealedPlayer) moves to player");
 		setIdea("follow");
@@ -230,9 +229,12 @@ public abstract class DomesticAnimal extends Creature {
     	return false;
     }
 	
-	
-	// Checks who is the nearest player and returns it
-	// Returns null when no nearby player in given range
+	/**
+	 * Checks who is the nearest player and returns it
+	 * 
+	 * @return Player
+	 *              nearest player or null when there's no such player
+	 */
 	public Player getNearestPlayer(final double range) {
 		final int x = getX();
 		final int y = getY();
@@ -262,9 +264,12 @@ public abstract class DomesticAnimal extends Creature {
 		return nearest;
 	}// getNearestPlayer
 	
-	
-	// Calls getNearestPlayer in a range of 5 squares
-	// returns false when no player found else returns true
+	/**
+	 * Calls getNearestPlayer in a range of 5 squares
+	 * 
+	 * @returns <code>true</code>, if there is a nearby player, otherwise
+	 * 	<code>false</code>
+	 */
 	protected boolean playersNearby() {
 		if (getNearestPlayer(5) != null) {
 			return true;
@@ -272,6 +277,11 @@ public abstract class DomesticAnimal extends Creature {
 		return false;
 	}// playersNearby
 	
+	/**
+	 * Function that makes ninja monkey steal
+	 * Can only steal stackable items from array of steleableObjects
+	 * Equips stolen item to owner
+	 */
 	protected void steal(Player stealedPlayer)
 	{
 		String[] steleableObjects = {"money", "emerald", "sapphire", "diamond",
