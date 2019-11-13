@@ -83,7 +83,7 @@ public class StallRentingConditonsTest {
 		en.step(player, "bye");
 		assertEquals("Byeeeee.", getReply(npc));
 
-		
+		assertFalse(player.isEquipped("stall"));
 		assertFalse(player.isEquipped("money"));
 
 		// player doesn't  have money
@@ -117,8 +117,10 @@ public class StallRentingConditonsTest {
 		assertEquals("A stall will cost 5000. Do you want to buy it?", getReply(npc));
 		en.step(player, "yes");
 		assertEquals("Congratulations! Here is your stall!", getReply(npc));
+		
 		assertFalse(player.isEquipped("money"));
-
+		assertTrue(player.isEquipped("stall"));
+		
 		en.step(player, "bye");
 		assertEquals("Byeeeee.", getReply(npc));
 
