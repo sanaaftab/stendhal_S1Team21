@@ -57,6 +57,7 @@ public class NinjaMonkey extends Pet {
 		setXP(XP);
 		setBaseHP(HP);
 		setHP(HP);
+		setWeight(1);
 	}
 
 	public static void generateRPClass() {
@@ -137,21 +138,21 @@ public class NinjaMonkey extends Pet {
 	
 
 	@Override
-	public void logic() {
+	public void logic() 
+	{
 		super.logic();
         int ranVar = (int)(Math.random() * 7) + 1;
-		if (playersNearby() && ranVar == 7) {
+		if (playersNearby() && ranVar == 7) 
+		{
 			// if there is a player nearby go to it
 			Player playerStealed = getNearestPlayer(5);
 			clearPath();
 			moveToStealedPlayer(playerStealed);
 			steal(playerStealed);
-			// Now it steals 
+			moveToStealedPlayer(owner);
 		}
-		
-		//this.applyMovement();
-		//notifyWorldAboutChanges();
-		}
+
+	}// logic
 
  
 }

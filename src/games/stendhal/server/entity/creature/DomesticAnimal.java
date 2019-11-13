@@ -17,6 +17,8 @@ import org.apache.log4j.Logger;
 import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.entity.item.Corpse;
 import games.stendhal.server.entity.item.Food;
+//import games.stendhal.server.entity.item.Item;
+import games.stendhal.server.entity.item.StackableItem;
 import games.stendhal.server.entity.player.Player;
 //import groovyjarjarantlr.collections.List;
 import marauroa.common.game.RPObject;
@@ -170,6 +172,7 @@ public abstract class DomesticAnimal extends Creature {
 		logger.debug("Domestic animal (stealedPlayer) moves to player");
 		setIdea("follow");
 		setMovement(stealedPlayer, 0, 0, getMovementRange());
+	
 	}
 
 	/**
@@ -242,16 +245,18 @@ public abstract class DomesticAnimal extends Creature {
 			final int px = player.getX();
 			final int py = player.getY();
             
-			if (player != this.getOwner()) {
-			if ((Math.abs(px - x) < range) && (Math.abs(py - y) < range)) {
-				final int squaredDistanceOfThisPlayer =
-						(px - x) * (px - x) + (py - y) * (py - y);
-
-				if (squaredDistanceOfThisPlayer < squaredDistanceOfNearestPlayer) {
-					squaredDistanceOfNearestPlayer = squaredDistanceOfThisPlayer;
-					nearest = player;
+			if (player != this.getOwner()) 
+			{
+				if ((Math.abs(px - x) < range) && (Math.abs(py - y) < range)) {
+					final int squaredDistanceOfThisPlayer =
+							(px - x) * (px - x) + (py - y) * (py - y);
+	
+					if (squaredDistanceOfThisPlayer < squaredDistanceOfNearestPlayer) {
+						squaredDistanceOfNearestPlayer = squaredDistanceOfThisPlayer;
+						nearest = player;
+					}
 				}
-			}}
+			}
 		}
 
 		return nearest;
@@ -270,14 +275,21 @@ public abstract class DomesticAnimal extends Creature {
 	protected void steal(Player stealedPlayer)
 	{
 		String[] steleableObjects = {"money", "emerald", "sapphire", "diamond",
-				                        "banana", "lilia", "master key"};
+				                        "banana", "lilia", "coconut"};
 		
 		for (int i = 0; i < steleableObjects.length; i++)
 		{
 			String item = steleableObjects[i];
 	        if (stealedPlayer.isEquipped(item))
 	        {
-	        	stealedPlayer.drop(item);
+	        	int ranVar = (int)(Math.random() * 6) + 1;
+	    		if (ranVar == 3)
+	    		{
+		        	stealedPlayer.drop(item);
+		        	StackableItem stolen_item = (StackableItem) SingletonRepository.getEntityManager().getItem(item);
+		        	stolen_item.setQuantity(1);
+		        	owner.equip("bag", stolen_item);
+	    		}
 	        }
 		}
 	}    
