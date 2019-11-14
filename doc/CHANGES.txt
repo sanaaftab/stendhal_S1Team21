@@ -1,6 +1,15 @@
 Changelog
 ---------
 ---------
+1.32
+*features*
+- added Ninja Monkey pet which can steal from nearby players
+- added ability to purchase a market stall from an NPC in Deniran Castle
+- added a new item 'newspaper'
+- added a new NPC 'Lon Jatham' who the player can talk to and can initialise a quest
+
+
+
 1.31
 *fixes*
 - summon pet scroll remembers pet attributes
