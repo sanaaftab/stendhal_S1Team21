@@ -5,6 +5,9 @@ package games.stendhal.server.entity.item;
 
 import java.util.Map;
 
+import games.stendhal.server.entity.RPEntity;
+import games.stendhal.server.entity.item.behavior.UseBehavior;
+
 /**
  * @author Shaurya Gautam
  *
@@ -29,4 +32,15 @@ public class Newspaper extends Item {
 		super(item);
 	}
 
+	@Override
+	public void setUseBehavior(UseBehavior behavior) {
+		super.setUseBehavior(behavior);
+	}
+
+	@Override
+	public boolean onUsed(RPEntity user) {
+		user.sendPrivateText("You took a look at the contents of the newspaper.");
+		return super.onUsed(user);
+	}
+	
 }
