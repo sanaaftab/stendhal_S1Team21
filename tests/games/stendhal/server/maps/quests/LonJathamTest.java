@@ -52,10 +52,7 @@ public class LonJathamTest extends ZonePlayerAndNPCTestImpl{
 		//CHANGE TO INSITUTE OF THECK IN DEHRIAN
 		setZoneForPlayer(ZONE_NAME);
 		addZoneConfigurator(new InstituteProfessor(), ZONE_NAME);
-		//Can be used as a stamp to create NPC to get signs from
-//		addZoneConfigurator(new GreeterNPC(), ZONE_NAME);
-		//This is actual construction of the zone so John will be able to talk to us and player will see him
-//		addZoneConfigurator(new  KirdnehFishyMarketNPC(),"int_deniran_institute");
+
 	}
 	
 
@@ -91,67 +88,5 @@ public class LonJathamTest extends ZonePlayerAndNPCTestImpl{
 		assertEquals("Au revoir.", getReply(npc));
 	}
 	
-//	// Test with 1 signed prospectus
-//	@Test
-//	public void testQuestWithFirstSignedDoc() {
-//		SpeakerNPC npc = SingletonRepository.getNPCList().get("Lon_Jatham");
-//		Engine en = npc.getEngine();
-//		player.setQuest(QUEST_SLOT, "start");
-//		PlayerTestHelper.equipWithItem(player, "signed_prospectus");
-//
-//		en.step(player, "hi");
-//		assertEquals("Bonjour! I am Lonny The Greatest. If you want to know about collusion - just ask me! Khem, I wanted to say, I want to enroll people "
-//				+ "to study in my university!", getReply(npc));
-//		en.step(player, "quest");
-//		assertEquals("Okay, you found the first poor soul. 2 more to go!", getReply(npc));
-//		en.step(player, "ok");
-//		en.step(player, "task");
-//		assertEquals("Yes, you need to finish the task - 2 more signatures!", getReply(npc));
-//		en.step(player, "bye");
-//		assertEquals("Au revoir.", getReply(npc));
-//	}
-//	
-//	//test with 2 signed prospectus
-//	@Test
-//	public void testQuestWithTwoSignedDoc() {
-//		SpeakerNPC npc = SingletonRepository.getNPCList().get("Lon_Jatham");
-//		Engine en = npc.getEngine();
-//		player.setQuest(QUEST_SLOT, "start");
-//		PlayerTestHelper.equipWithItem(player, "signed_prospectus");
-//
-//		en.step(player, "hi");
-//		assertEquals("Bonjour! I am Lonny The Greatest. If you want to know about collusion - just ask me! Khem, I wanted to say, I want to enroll people "
-//				+ "to study in my university!", getReply(npc));
-//		en.step(player, "quest");
-//		assertEquals("Okay, you found the first poor soul. 2 more to go!", getReply(npc));
-//		en.step(player, "ok");
-//		en.step(player, "task");
-//		assertEquals("Yes, you need to finish the task - 2 more signatures!", getReply(npc));
-//		en.step(player, "bye");
-//		assertEquals("Au revoir.", getReply(npc));
-//	}
-//	
-//	//test with 3 signed prospectus
-//	//get a reward
-//	@Test
-//	public void testQuestWithAllThreeSignedDocs() {
-//		SpeakerNPC npc = SingletonRepository.getNPCList().get("Lon_Jatham");
-//		Engine en = npc.getEngine();
-//		player.setQuest(QUEST_SLOT, "start");
-//		PlayerTestHelper.equipWithItem(player, "signed_prospectus");
-//
-//		en.step(player, "HI");
-//		assertEquals("Hello! Welcome to Fado City! You can #learn about Fado from me.", getReply(npc));
-//		en.step(player, "quest");
-//		// [19:05] krupi earns 100 experience points.
-//		assertEquals("Thank you ever so much! That's just what I wanted! Here, take these potions that Sarzina gave me - I hardly have use for them here.", getReply(npc));
-//		en.step(player, "thanks");
-//		en.step(player, "task");
-//		assertEquals("Thank you, I don't need anything right now.", getReply(npc));
-//		en.step(player, "water");
-//		assertEquals("Thank you, I don't need anything right now.", getReply(npc));
-//		en.step(player, "bye");
-//		assertEquals("Bye.", getReply(npc));
-//	}
 
 }
