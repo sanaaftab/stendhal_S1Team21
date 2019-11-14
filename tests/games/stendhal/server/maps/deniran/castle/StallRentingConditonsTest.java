@@ -1,10 +1,8 @@
 package games.stendhal.server.maps.deniran.castle;
 
 import static org.junit.Assert.*;
-//import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-//import static org.junit.Assert.assertThat;
 import static utilities.SpeakerNPCTestHelper.getReply;
 
 import org.junit.After;
@@ -43,8 +41,7 @@ public class StallRentingConditonsTest {
 		zone.add(player);
 	}
 	
-
-
+	
 	@After
 	public void tearDown() {
 		PlayerTestHelper.removeNPC("Steve");
@@ -87,7 +84,6 @@ public class StallRentingConditonsTest {
 		assertFalse(player.isEquipped("money"));
 
 		// player doesn't  have money
-		
 		en.step(player, "hi");
 		assertEquals("Hello there, welcome to the Deniran Castle!", getReply(npc));
 		en.step(player, "job");
@@ -101,12 +97,9 @@ public class StallRentingConditonsTest {
 		en.step(player, "bye");
 		assertEquals("Byeeeee.", getReply(npc));
 
-		
-		
+		//players has everything required
 		PlayerTestHelper.equipWithMoney(player, 5000);
-		
-        //players has everything required
-		
+
 		en.step(player, "hi");
 		assertEquals("Hello there, welcome to the Deniran Castle!", getReply(npc));
 		en.step(player, "job");
@@ -127,4 +120,3 @@ public class StallRentingConditonsTest {
 	}
 
 }
-
