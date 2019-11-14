@@ -17,8 +17,10 @@ import org.apache.log4j.Logger;
 import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.entity.item.Corpse;
 import games.stendhal.server.entity.item.Food;
+import games.stendhal.server.entity.item.StackableItem;
 import games.stendhal.server.entity.player.Player;
 import marauroa.common.game.RPObject;
+
 
 /**
  * A domestic animal can be owned by a player;
@@ -160,6 +162,17 @@ public abstract class DomesticAnimal extends Creature {
 		setMovement(owner, 0, 0, getMovementRange());
 		// setAsynchonousMovement(owner,0,0);
 	}
+	
+	
+	/**
+	 * Moves pet to player from which pet will steal
+	 */
+	protected void moveToStealedPlayer(Player stealedPlayer) {
+		logger.debug("Domestic animal (stealedPlayer) moves to player");
+		setIdea("follow");
+		setMovement(stealedPlayer, 0, 0, getMovementRange());
+	
+	}
 
 	/**
 	 * Can be called when the sheep dies. Puts meat onto its corpse; the amount
@@ -215,5 +228,81 @@ public abstract class DomesticAnimal extends Creature {
 
     	return false;
     }
+	
+	/**
+	 * Checks who is the nearest player and returns it
+	 * 
+	 * @return Player
+	 *              nearest player or null when there's no such player
+	 */
+	public Player getNearestPlayer(final double range) {
+		final int x = getX();
+		final int y = getY();
+
+		Player nearest = null;
+
+		int squaredDistanceOfNearestPlayer = Integer.MAX_VALUE;
+
+		for (final Player player : getZone().getPlayers()) {
+			final int px = player.getX();
+			final int py = player.getY();
+            
+			if (player != this.getOwner()) 
+			{
+				if ((Math.abs(px - x) < range) && (Math.abs(py - y) < range)) {
+					final int squaredDistanceOfThisPlayer =
+							(px - x) * (px - x) + (py - y) * (py - y);
+	
+					if (squaredDistanceOfThisPlayer < squaredDistanceOfNearestPlayer) {
+						squaredDistanceOfNearestPlayer = squaredDistanceOfThisPlayer;
+						nearest = player;
+					}
+				}
+			}
+		}
+
+		return nearest;
+	}// getNearestPlayer
+	
+	/**
+	 * Calls getNearestPlayer in a range of 5 squares
+	 * 
+	 * @returns <code>true</code>, if there is a nearby player, otherwise
+	 * 	<code>false</code>
+	 */
+	protected boolean playersNearby() {
+		if (getNearestPlayer(5) != null) {
+			return true;
+		}
+		return false;
+	}// playersNearby
+	
+	/**
+	 * Function that makes ninja monkey steal
+	 * Can only steal stackable items from array of steleableObjects
+	 * Equips stolen item to owner
+	 */
+	protected void steal(Player stealedPlayer)
+	{
+		String[] steleableObjects = {"money", "emerald", "sapphire", "diamond",
+				                        "banana", "lilia", "coconut"};
+		
+		for (int i = 0; i < steleableObjects.length; i++)
+		{
+			String item = steleableObjects[i];
+	        if (stealedPlayer.isEquipped(item))
+	        {
+	        	int ranVar = (int)(Math.random() * 6) + 1;
+	    		if (ranVar == 3)
+	    		{
+		        	stealedPlayer.drop(item);
+		        	StackableItem stolen_item = (StackableItem) SingletonRepository.getEntityManager().getItem(item);
+		        	stolen_item.setQuantity(1);
+		        	owner.equip("bag", stolen_item);
+	    		}
+	        }
+		}
+	}    
+	
 
 }

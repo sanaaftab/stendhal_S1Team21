@@ -12,6 +12,7 @@ import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.entity.creature.BabyDragon;
 import games.stendhal.server.entity.creature.Cat;
+import games.stendhal.server.entity.creature.NinjaMonkey;
 import games.stendhal.server.entity.creature.Pet;
 import games.stendhal.server.entity.creature.PurpleDragon;
 //import games.stendhal.server.entity.creature.Sheep;
@@ -105,6 +106,17 @@ public class SummonPetScroll extends Scroll {
 			pet.setWeight(Integer.parseInt(arrayOfStats[7]));
 
 			break;
+		case "ninja monkey":
+			pet = new NinjaMonkey(player);
+			pet.setTitle(arrayOfStats[1]);
+			pet.setXP(Integer.parseInt(arrayOfStats[2]));
+			pet.setHP(Integer.parseInt(arrayOfStats[3]));
+			pet.setBaseHP(Integer.parseInt(arrayOfStats[4]));
+			pet.setAtk(Integer.parseInt(arrayOfStats[5]));
+			pet.setDef(Integer.parseInt(arrayOfStats[6]));
+			pet.setWeight(Integer.parseInt(arrayOfStats[7]));
+
+			break;
 		case "baby dragon":
 			pet = new BabyDragon(player);
 			pet.setTitle(arrayOfStats[1]);
@@ -127,6 +139,7 @@ public class SummonPetScroll extends Scroll {
 			pet.setWeight(Integer.parseInt(arrayOfStats[7]));
 
 			break;
+		
 		default:
 			// Didn't match a known pet type
 			player.sendPrivateText("This scroll does not seem to work. You should talk to the magician who created it.");
