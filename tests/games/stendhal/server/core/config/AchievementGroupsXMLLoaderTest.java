@@ -31,7 +31,7 @@ public class AchievementGroupsXMLLoaderTest {
 	@Test
 	public void test() throws URISyntaxException, SAXException, IOException{
 		AchievementGroupsXMLLoader loader = new AchievementGroupsXMLLoader(new URI("testachiement.xml"));
-		List<DefaultAchievement> list = loader.load();
+		List<Achievement> list = loader.load();
 	}
 
 }
