@@ -1,5 +1,5 @@
 /*
- * @(#) src/games/stendhal/server/config/ZoneGroupsXMLLoader.java
+ * @(#) src/games/stendhal/server/config/AchievementGroupsXMLLoader.java
  *
  * $Id$
  */
@@ -8,7 +8,6 @@ package games.stendhal.server.core.config;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,7 +15,8 @@ import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import games.stendhal.server.core.rule.defaultruleset.DefaultCreature;
+import games.stendhal.server.core.rp.achievement.Achievement;
+
 
 /**
  * Load and configure creatures via an XML configuration file.
@@ -29,9 +29,32 @@ public class AchievementGroupsXMLLoader extends DefaultHandler {
 	protected URI uri;
 
 	/**
-	 * Create an xml based loader of creature groups.
+	 * Create an xml based loader of achievement groups.
 	 *
 	 * @param uri
 	 *            The location of the configuration file.
 	 */
+	
+	/**
+	 * Load achievements.
+	 *
+	 * @return list of achievements
+	 * @throws SAXException
+	 *             If a SAX error occurred.
+	 * @throws IOException
+	 *             If an I/O error occurred.
+	 */
+	public List<Achievement> load() throws SAXException, IOException {
+		final GroupsXMLLoader groupsLoader = new GroupsXMLLoader(uri);
+		final List<URI> groups = groupsLoader.load();
+
+		final AchievementsXMLLoader loader = new AchievementsXMLLoader();
+		final List<Achievement> list = new LinkedList<Achievement>();
+		for (final URI groupUri : groups) {
+			LOGGER.debug("Loading achievement group [" + groupUri + "]");
+			list.addAll(loader.load(groupUri));
+		}
+
+		return list;
+	}
 }
