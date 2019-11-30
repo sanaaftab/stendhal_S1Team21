@@ -31,20 +31,20 @@ public class Achievement {
 	/** base score for difficult achievements */
 	public static final int HARD_BASE_SCORE = 5;
 
-	private final String identifier;
+	private  String identifier;
 
-	private final String title;
+	private  String title;
 
-	private final Category category;
+	private Category category;
 
-	private final String description;
+	private String description;
 
-	private final int baseScore;
+	private int baseScore;
 
 	/** is this achievement visible? */
-	private final boolean active;
+	private  boolean active;
 
-	private final ChatCondition condition;
+	private ChatCondition condition;
 
 
 
@@ -124,5 +124,36 @@ public class Achievement {
 	public String toString() {
 		return "Achievement<id: "+identifier+", title: "+title+">";
 	}
+	
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
+	}
+	
+	public void setScore(String baseScore) {
+		this.baseScore = Integer.parseInt(baseScore);
+	}
+	
+	public void setActive(String active) {
+		this.active = Boolean.parseBoolean(active);
+	}
+	
+	public void setCategory(Category category){
+		 this.category = category;
+	}
+
+	public void setCondition(ChatCondition condition) {
+		this.condition = condition;
+		// TODO Auto-generated method stub
+		
+	}
+	
 
 }
