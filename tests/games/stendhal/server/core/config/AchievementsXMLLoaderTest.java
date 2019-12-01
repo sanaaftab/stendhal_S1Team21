@@ -1,7 +1,5 @@
 package games.stendhal.server.core.config;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
 import java.net.URI;
 //import java.net.URI;
@@ -12,11 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import games.stendhal.server.core.engine.SingletonRepository;
-import games.stendhal.server.core.engine.StendhalRPWorld;
-import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.maps.MockStendlRPWorld;
-import marauroa.common.game.IRPZone;
 import marauroa.server.game.db.DatabaseFactory;
 
 public class AchievementsXMLLoaderTest {
@@ -31,10 +25,13 @@ public class AchievementsXMLLoaderTest {
 	public void tearDown() throws Exception {
 	}
 
+	/**
+	 * @throws IOException  
+	 */
 	@Test
 	public void testReadAchievement() throws URISyntaxException, SAXException, IOException {
 		AchievementsXMLLoader loader = new AchievementsXMLLoader(new URI("testachievement.xml"));
-		loader.load();
+		loader.load(new URI("testachievement.xml"));
 		
 	}
 

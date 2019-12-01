@@ -51,7 +51,7 @@ public class AchievementGroupsXMLLoader extends DefaultHandler {
 		final GroupsXMLLoader groupsLoader = new GroupsXMLLoader(uri);
 		final List<URI> groups = groupsLoader.load();
 
-		final AchievementsXMLLoader loader = new AchievementsXMLLoader();
+		final AchievementsXMLLoader loader = new AchievementsXMLLoader(uri);
 		final List<Achievement> list = new LinkedList<Achievement>();
 		for (final URI groupUri : groups) {
 			LOGGER.debug("Loading achievement group [" + groupUri + "]");
