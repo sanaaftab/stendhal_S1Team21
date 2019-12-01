@@ -31,7 +31,7 @@ public class AchievementGroupsXMLLoaderTest {
 
 	@Test
 	public void testLoad() throws URISyntaxException, SAXException, IOException {
-		AchievementGroupsXMLLoader loader = new AchievementGroupsXMLLoader(new URI("testachievement.xml"));
+		AchievementGroupsXMLLoader loader = new AchievementGroupsXMLLoader(new URI("testachievementgroups.xml"));
 		List<Achievement> list = loader.load();
 		assertThat(Boolean.valueOf(list.isEmpty()), is(Boolean.FALSE));
 		Achievement achievement = list.get(0);
