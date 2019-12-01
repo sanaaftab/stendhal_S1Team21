@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<achievements xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../achievements.xsd ">
+	
+	<achievements identifier="xp.level.10">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.ExperienceAchievementFactory" />
+		<type title="Greenhorn" />
+		<description sentence="Reach level 10" />
+		<attributes>
+			<base_score value="1" />
+			<category value="EXPERIENCE" />
+			<active value="true" />
+			<chat_condition value="10" />
+		</attributes>
+	</achievements>
+	
+</achievements>
+
+

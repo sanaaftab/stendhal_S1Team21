@@ -29,11 +29,14 @@ public class AchievementGroupsXMLLoader extends DefaultHandler {
 	protected URI uri;
 
 	/**
-	 * Create an xml based loader of achievement groups.
+	 * Create an XML based loader of achievement groups.
 	 *
 	 * @param uri
 	 *            The location of the configuration file.
 	 */
+	public AchievementGroupsXMLLoader(final URI uri) {
+		this.uri = uri;
+	}
 	
 	/**
 	 * Load achievements.

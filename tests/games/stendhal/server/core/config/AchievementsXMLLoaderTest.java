@@ -33,7 +33,7 @@ public class AchievementsXMLLoaderTest {
 
 	@Test
 	public void testReadAchievement() throws URISyntaxException, SAXException, IOException {
-		AchievementsXMLLoader loader = new AchievementsXMLLoader(new URI("testachiement.xml"));
+		AchievementsXMLLoader loader = new AchievementsXMLLoader(new URI("testachievement.xml"));
 		loader.load();
 		
 	}
