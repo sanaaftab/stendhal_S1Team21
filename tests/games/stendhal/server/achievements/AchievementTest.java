@@ -4,8 +4,9 @@
 package games.stendhal.server.achievements;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.is;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -14,6 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import games.stendhal.server.core.rp.achievement.Achievement;
+
 import games.stendhal.server.core.rp.achievement.factory.InteriorZoneAchievementFactory;
 import games.stendhal.server.core.rp.achievement.factory.MithrilbourghEnemyArmyAchievementFactory;
 import games.stendhal.server.core.rp.achievement.factory.OutsideZoneAchievementFactory;
@@ -21,18 +23,26 @@ import games.stendhal.server.core.rp.achievement.factory.QuestAchievementFactory
 import games.stendhal.server.core.rp.achievement.factory.SemosMonsterQuestAchievementFactory;
 import games.stendhal.server.core.rp.achievement.factory.UndergroundZoneAchievementFactory;
 
+import games.stendhal.server.entity.npc.condition.PlayerHasCompletedAchievementsCondition;
+import games.stendhal.server.entity.player.Player;
+import games.stendhal.server.maps.MockStendlRPWorld;
+import utilities.PlayerTestHelper;
+	
 /**
  * @author Albert Viilik
  * @author Shurya Gautam
  *
  */
 public class AchievementTest {
+	private Player player;
+	private Player player1;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		MockStendlRPWorld.get();
 	}
 
 	/**
@@ -40,6 +50,7 @@ public class AchievementTest {
 	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		MockStendlRPWorld.reset();
 	}
 
 	/**
@@ -47,6 +58,8 @@ public class AchievementTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		player = PlayerTestHelper.createPlayer("testplayer");
+		player.initReachedAchievements();
 	}
 
 	/**
@@ -59,86 +72,27 @@ public class AchievementTest {
 	@Test
 	public void test() {
 		InteriorZoneAchievementFactory factory = new InteriorZoneAchievementFactory();
-		SemosMonsterQuestAchievementFactory factory1 = new SemosMonsterQuestAchievementFactory();
-		UndergroundZoneAchievementFactory factory2 = new UndergroundZoneAchievementFactory();
-		MithrilbourghEnemyArmyAchievementFactory factory3 = new MithrilbourghEnemyArmyAchievementFactory();
-		OutsideZoneAchievementFactory factory4 = new OutsideZoneAchievementFactory();
-		QuestAchievementFactory factory5 = new QuestAchievementFactory();
+//		SemosMonsterQuestAchievementFactory factory1 = new SemosMonsterQuestAchievementFactory();
+//		UndergroundZoneAchievementFactory factory2 = new UndergroundZoneAchievementFactory();
+//		MithrilbourghEnemyArmyAchievementFactory factory3 = new MithrilbourghEnemyArmyAchievementFactory();
+//		OutsideZoneAchievementFactory factory4 = new OutsideZoneAchievementFactory();
+//		QuestAchievementFactory factory5 = new QuestAchievementFactory();
 		
-		Collection<Achievement> listOfAchievements = factory.createAchievements();
 		
-		System.out.println("FACTORY: InteriorZoneAchievementFactory\n");
-		for (Achievement a: listOfAchievements) {
-			System.out.println("ACHIEVEMENT: " + a);
-			System.out.println("CATEGORY: " + a.getCategory());
-			System.out.println("IDENTIFIER: " + a.getIdentifier());
-			System.out.println("TITLE: " + a.getTitle());
-			System.out.println("DESCRIPTION: " + a.getDescription());
-			System.out.println("BASE_SCORE: " + a.getBaseScore());
-			System.out.println("IS_ACTIVE: " + a.isActive() + "\n");
-		}
+		ArrayList<Achievement> achievements = new ArrayList<Achievement>(factory.createAchievements());
+		System.out.println(achievements);
+		assertEquals(achievements.get(0).getCategory().toString(), "INTERIOR_ZONE");
+		assertEquals(achievements.get(0).getIdentifier().toString(), "zone.interior.semos");
+		assertEquals(achievements.get(0).getTitle().toString(), "Home maker");
+		assertEquals(achievements.get(0).getDescription().toString(), "Visit all interior zones in the Semos region");
+		assertEquals(achievements.get(0).getBaseScore(), 2);
+		assertTrue(achievements.get(0).isActive());
 		
-
-		System.out.println("FACTORY: SemosMonsterQuestAchievementFactory\n");
-		listOfAchievements = factory1.createAchievements();
-		for (Achievement a: listOfAchievements) {
-			System.out.println("ACHIEVEMENT: " + a);
-			System.out.println("CATEGORY: " + a.getCategory());
-			System.out.println("IDENTIFIER: " + a.getIdentifier());
-			System.out.println("TITLE: " + a.getTitle());
-			System.out.println("DESCRIPTION: " + a.getDescription());
-			System.out.println("BASE_SCORE: " + a.getBaseScore());
-			System.out.println("IS_ACTIVE: " + a.isActive() + "\n");
-		}
+		player.addReachedAchievement("zone.interior.semos");
+		assertTrue(achievements.get(0).isFulfilled(player));
 		
-		System.out.println("FACTORY: UndergroundZoneAchievementFactory\n");
-		listOfAchievements = factory2.createAchievements();
-		for (Achievement a: listOfAchievements) {
-			System.out.println("ACHIEVEMENT: " + a);
-			System.out.println("CATEGORY: " + a.getCategory());
-			System.out.println("IDENTIFIER: " + a.getIdentifier());
-			System.out.println("TITLE: " + a.getTitle());
-			System.out.println("DESCRIPTION: " + a.getDescription());
-			System.out.println("BASE_SCORE: " + a.getBaseScore());
-			System.out.println("IS_ACTIVE: " + a.isActive() + "\n");
-		}
 		
-		System.out.println("FACTORY: MithrilbourghEnemyArmyAchievementFactory\n");
-		listOfAchievements = factory3.createAchievements();
-		for (Achievement a: listOfAchievements) {
-			System.out.println("ACHIEVEMENT: " + a);
-			System.out.println("CATEGORY: " + a.getCategory());
-			System.out.println("IDENTIFIER: " + a.getIdentifier());
-			System.out.println("TITLE: " + a.getTitle());
-			System.out.println("DESCRIPTION: " + a.getDescription());
-			System.out.println("BASE_SCORE: " + a.getBaseScore());
-			System.out.println("IS_ACTIVE: " + a.isActive() + "\n");
-		}
-		
-		System.out.println("FACTORY: OutsideZoneAchievementFactory\n");
-		listOfAchievements = factory4.createAchievements();
-		for (Achievement a: listOfAchievements) {
-			System.out.println("ACHIEVEMENT: " + a);
-			System.out.println("CATEGORY: " + a.getCategory());
-			System.out.println("IDENTIFIER: " + a.getIdentifier());
-			System.out.println("TITLE: " + a.getTitle());
-			System.out.println("DESCRIPTION: " + a.getDescription());
-			System.out.println("BASE_SCORE: " + a.getBaseScore());
-			System.out.println("IS_ACTIVE: " + a.isActive() + "\n");
-		}
-		
-		System.out.println("FACTORY: QuestAchievementFactory\n");
-		listOfAchievements = factory5.createAchievements();
-		for (Achievement a: listOfAchievements) {
-			System.out.println("ACHIEVEMENT: " + a);
-			System.out.println("CATEGORY: " + a.getCategory());
-			System.out.println("IDENTIFIER: " + a.getIdentifier());
-			System.out.println("TITLE: " + a.getTitle());
-			System.out.println("DESCRIPTION: " + a.getDescription());
-			System.out.println("BASE_SCORE: " + a.getBaseScore());
-			System.out.println("IS_ACTIVE: " + a.isActive() + "\n");
-		}
-		assertTrue(true);
+//		assertTrue(true);
 //		fail("Not yet implemented");
 	}
 
