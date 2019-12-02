@@ -12,18 +12,23 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import games.stendhal.server.core.rp.achievement.AchievementNotifier;
+import games.stendhal.server.entity.player.Player;
+import games.stendhal.server.maps.MockStendlRPWorld;
+import utilities.PlayerTestHelper;
 
 /**
  * @author Albert Viilik
  *
  */
 public class AchievementNotifierTest {
+	private Player player;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		MockStendlRPWorld.get();
 	}
 
 	/**
@@ -31,6 +36,7 @@ public class AchievementNotifierTest {
 	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		MockStendlRPWorld.reset();
 	}
 
 	/**
@@ -38,6 +44,8 @@ public class AchievementNotifierTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		player = PlayerTestHelper.createPlayer("testplayer");
+		player.initReachedAchievements();
 	}
 
 	/**
@@ -134,7 +142,10 @@ public class AchievementNotifierTest {
 	 */
 	@Test
 	public void testAwardAchievementIfNotYetReached() {
-		fail("Not yet implemented");
+		AchievementNotifier an = AchievementNotifier.get();
+		an.initialize();
+		an.awardAchievementIfNotYetReached(player, "zone.interior.semos");
+		assertTrue(player.hasReachedAchievement("zone.interior.semos"));
 	}
 
 	/**
