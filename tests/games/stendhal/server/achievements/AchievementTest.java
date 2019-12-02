@@ -27,7 +27,6 @@ import utilities.PlayerTestHelper;
  */
 public class AchievementTest {
 	private Player player;
-	private Player player1;
 
 	/**
 	 * @throws java.lang.Exception
