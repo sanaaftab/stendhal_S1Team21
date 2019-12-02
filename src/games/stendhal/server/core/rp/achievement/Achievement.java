@@ -12,8 +12,17 @@
  ***************************************************************************/
 package games.stendhal.server.core.rp.achievement;
 
+//import java.lang.reflect.Constructor;
+
+import org.apache.log4j.Logger;
+
+//import games.stendhal.common.constants.Nature;
+//import games.stendhal.server.core.rule.defaultruleset.DefaultSpell;
+import games.stendhal.server.core.rule.defaultruleset.creator.AbstractCreator;
+//import games.stendhal.server.core.rule.defaultruleset.creator.FullSpellCreator;
 import games.stendhal.server.entity.npc.ChatCondition;
 import games.stendhal.server.entity.player.Player;
+//import games.stendhal.server.entity.spell.Spell;
 /**
  * An Achievement a player can reach while playing the game.
  * Achievements are given for example for doing a certain number of quests or killing a number of special creatures
@@ -21,6 +30,13 @@ import games.stendhal.server.entity.player.Player;
  * @author madmetzger
  */
 public class Achievement {
+	
+	private AbstractCreator<Achievement> creator;
+
+	
+	private static final Logger logger = Logger.getLogger(Achievement.class);
+	
+	private String name;
 
 	/** base score for easy achievements */
 	public static final int EASY_BASE_SCORE = 1;
@@ -30,6 +46,8 @@ public class Achievement {
 
 	/** base score for difficult achievements */
 	public static final int HARD_BASE_SCORE = 5;
+	
+	private Class<?> implementationClass;
 
 	private  String identifier;
 
@@ -58,7 +76,36 @@ public class Achievement {
 	 * @param baseScore
 	 * @param active
 	 * @param condition
+	 * 
+	 * 
+	 * 
 	 */
+	
+	
+//	public Achievement(String name, String clazzName) {
+//		try {
+//			this.name = name;
+//			this.implementationClass = Class.forName(clazzName);
+//			this.buildCreator(implementationClass);
+//		} catch (ClassNotFoundException e) {
+//			logger.error("Error while creating AChievement", e);
+//		}
+//	}
+//
+//	private void buildCreator(final Class< ? > implementation) {
+//		try {
+//			Constructor< ? > construct;
+//			construct = implementation.getConstructor(new Class[] {
+//					String.class, String.class, Category.class, String.class, int.class,
+//					boolean.class, ChatCondition.class});
+//
+//			this.creator = new FullSpellCreator(this, construct);
+//		} catch (final NoSuchMethodException ex) {
+//			logger.error("No matching full constructor for Spell found.", ex);
+//		}
+//
+//	}
+	
 	public Achievement(String identifier, String title, Category category, String description, int baseScore, boolean active, ChatCondition condition) {
 		this.identifier = identifier;
 		this.title = title;

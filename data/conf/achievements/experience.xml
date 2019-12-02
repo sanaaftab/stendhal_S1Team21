@@ -2,15 +2,17 @@
 <achievements xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="stendhal ../achievements.xsd ">
 
-	<achievement name ="Greenhorn">
-	 	<implementation> games.stendhal.server.core.rp.achievement.factory.ExperienceAchievementFactory" </implementation>
-		<identifier> xp.level.10 </identifier>
-		<title> Greenhorn </title>
-		<description>Reach level 10 </description>
-		<baseScore> 1 </baseScore>
-		<category> EXPERIENCE </category>
-		<active> true </active>
-		<condition> games.stendhal.server.entity.npc.condition.LevelGreaterThanCondition </condition>
+	<achievement name="Greenhorn">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.ExperienceAchievementFactory" />
+		<category value="EXPERIENCE"/>
+		<attributes>
+			<identifier value="xp.level.10" />
+			<title value="Greenhorn" />
+			<description value="Reach level 10" />
+			<baseScore value="1" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.LevelGreaterThanCondition" />
+		</attributes>
 	</achievement>
 
 </achievements>
