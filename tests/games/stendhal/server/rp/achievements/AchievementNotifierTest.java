@@ -1,7 +1,7 @@
 /**
  * 
  */
-package games.stendhal.server.achievements;
+package games.stendhal.server.rp.achievements;
 
 import static org.junit.Assert.*;
 
