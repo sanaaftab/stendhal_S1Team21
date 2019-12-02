@@ -4,7 +4,6 @@
 package games.stendhal.server.achievements;
 
 import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.is;
 
 import java.util.ArrayList;
 
@@ -17,13 +16,6 @@ import org.junit.Test;
 import games.stendhal.server.core.rp.achievement.Achievement;
 
 import games.stendhal.server.core.rp.achievement.factory.InteriorZoneAchievementFactory;
-import games.stendhal.server.core.rp.achievement.factory.MithrilbourghEnemyArmyAchievementFactory;
-import games.stendhal.server.core.rp.achievement.factory.OutsideZoneAchievementFactory;
-import games.stendhal.server.core.rp.achievement.factory.QuestAchievementFactory;
-import games.stendhal.server.core.rp.achievement.factory.SemosMonsterQuestAchievementFactory;
-import games.stendhal.server.core.rp.achievement.factory.UndergroundZoneAchievementFactory;
-
-import games.stendhal.server.entity.npc.condition.PlayerHasCompletedAchievementsCondition;
 import games.stendhal.server.entity.player.Player;
 import games.stendhal.server.maps.MockStendlRPWorld;
 import utilities.PlayerTestHelper;
