@@ -11,6 +11,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import games.stendhal.server.core.rp.achievement.AchievementNotifier;
+
 /**
  * @author Albert Viilik
  *
@@ -58,7 +60,9 @@ public class AchievementNotifierTest {
 	 */
 	@Test
 	public void testInitialize() {
-		fail("Not yet implemented");
+		AchievementNotifier an = AchievementNotifier.get();
+		an.initialize();
+		assertTrue(an.getAchievements().size() > 0);
 	}
 
 	/**
