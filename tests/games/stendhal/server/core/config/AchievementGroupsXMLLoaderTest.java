@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.xml.sax.SAXException;
 
 import games.stendhal.server.core.rp.achievement.Achievement;
+import games.stendhal.server.core.rp.achievement.Category;
 import games.stendhal.server.maps.MockStendlRPWorld;
 
 public class AchievementGroupsXMLLoaderTest {
@@ -36,10 +37,10 @@ public class AchievementGroupsXMLLoaderTest {
 		assertThat(Boolean.valueOf(list.isEmpty()), is(Boolean.FALSE));
 		Achievement achievement = list.get(0);
 		assertThat(achievement.getTitle(), is("Greenhorn"));
-		assertThat(achievement.getCategory(), is("EXPERIENCE"));
+		assertThat(achievement.getCategory(), is(Category.EXPERIENCE));
 		assertThat(achievement.getIdentifier(), is("xp.level.10"));
 		assertThat(achievement.getDescription(), is("Reach level 10"));
-		assertThat(achievement.getBaseScore(), is("1"));
+		assertThat(achievement.getBaseScore(), is(1));
 		assertThat(achievement.isActive(), is(Boolean.TRUE));
 		
 	}
