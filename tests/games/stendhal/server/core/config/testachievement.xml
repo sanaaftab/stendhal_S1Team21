@@ -12,6 +12,7 @@
 			<baseScore value="1" />
 			<active value="true" />
 			<condition class-name="games.stendhal.server.entity.npc.condition.LevelGreaterThanCondition" />
+			<parameter value="9"/>
 		</attributes>
 	</achievement>
 
