@@ -12,8 +12,17 @@
  ***************************************************************************/
 package games.stendhal.server.core.rp.achievement;
 
+//import java.lang.reflect.Constructor;
+
+import org.apache.log4j.Logger;
+
+//import games.stendhal.common.constants.Nature;
+//import games.stendhal.server.core.rule.defaultruleset.DefaultSpell;
+import games.stendhal.server.core.rule.defaultruleset.creator.AbstractCreator;
+//import games.stendhal.server.core.rule.defaultruleset.creator.FullSpellCreator;
 import games.stendhal.server.entity.npc.ChatCondition;
 import games.stendhal.server.entity.player.Player;
+//import games.stendhal.server.entity.spell.Spell;
 /**
  * An Achievement a player can reach while playing the game.
  * Achievements are given for example for doing a certain number of quests or killing a number of special creatures
@@ -21,6 +30,13 @@ import games.stendhal.server.entity.player.Player;
  * @author madmetzger
  */
 public class Achievement {
+	
+	private AbstractCreator<Achievement> creator;
+
+	
+	private static final Logger logger = Logger.getLogger(Achievement.class);
+	
+	private String name;
 
 	/** base score for easy achievements */
 	public static final int EASY_BASE_SCORE = 1;
@@ -30,21 +46,23 @@ public class Achievement {
 
 	/** base score for difficult achievements */
 	public static final int HARD_BASE_SCORE = 5;
+	
+	private Class<?> implementationClass;
 
-	private final String identifier;
+	private  String identifier;
 
-	private final String title;
+	private  String title;
 
-	private final Category category;
+	private Category category;
 
-	private final String description;
+	private String description;
 
-	private final int baseScore;
+	private int baseScore;
 
 	/** is this achievement visible? */
-	private final boolean active;
+	private  boolean active;
 
-	private final ChatCondition condition;
+	private ChatCondition condition;
 
 
 
@@ -58,7 +76,12 @@ public class Achievement {
 	 * @param baseScore
 	 * @param active
 	 * @param condition
+	 * 
+	 * 
+	 * 
 	 */
+	
+	
 	public Achievement(String identifier, String title, Category category, String description, int baseScore, boolean active, ChatCondition condition) {
 		this.identifier = identifier;
 		this.title = title;
@@ -124,5 +147,36 @@ public class Achievement {
 	public String toString() {
 		return "Achievement<id: "+identifier+", title: "+title+">";
 	}
+	
+//	public void setTitle(String title) {
+//		this.title = title;
+//	}
+//	
+//	public void setDescription(String description) {
+//		this.description = description;
+//	}
+//	
+//	public void setIdentifier(String identifier) {
+//		this.identifier = identifier;
+//	}
+//	
+//	public void setScore(String baseScore) {
+//		this.baseScore = Integer.parseInt(baseScore);
+//	}
+//	
+//	public void setActive(String active) {
+//		this.active = Boolean.parseBoolean(active);
+//	}
+//	
+//	public void setCategory(Category category){
+//		 this.category = category;
+//	}
+//
+//	public void setCondition(ChatCondition condition) {
+//		this.condition = condition;
+//		// TODO Auto-generated method stub
+//		
+//	}
+	
 
 }
