@@ -15,12 +15,14 @@ package games.stendhal.server.core.config;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Constructor;
 import java.net.URI;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+//import java.util.Arrays;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -31,15 +33,30 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 import games.stendhal.server.core.rp.achievement.*;
-import games.stendhal.server.core.rule.defaultruleset.DefaultItem;
-import games.stendhal.server.entity.item.behavior.UseBehavior;
 import games.stendhal.server.entity.npc.ChatCondition;
+//import games.stendhal.server.entity.npc.condition.LevelGreaterThanCondition;
+//import games.stendhal.server.entity.npc.condition.LevelGreaterThanCondition;
+//import games.stendhal.server.entity.npc.condition.PlayerHasKilledNumberOfCreaturesCondition;
+//import games.stendhal.server.entity.npc.condition.PlayerHasKilledNumberOfCreaturesCondition;
 
 public final class AchievementsXMLLoader extends DefaultHandler {
-	
+
 	/** the logger instance. */
-	private static final Logger logger = Logger.getLogger(AchievementsXMLLoader.class);
-	
+	private static final Logger LOGGER = Logger.getLogger(AchievementsXMLLoader.class);
+
+
+	/**
+	 * The zone group file.
+	 */
+	//private final URI uri;
+
+	/**
+	 * Create an XML based loader of zones.
+	 * @param uri the zone group file
+	 */
+//	public AchievementsXMLLoader(final URI uri) {
+//		this.uri = uri;
+//	}
 
 	public static final int EASY_BASE_SCORE = 1;
 
@@ -49,26 +66,42 @@ public final class AchievementsXMLLoader extends DefaultHandler {
 	/** base score for difficult achievements */
 	public static final int HARD_BASE_SCORE = 5;
 
-	private final String identifier;
+	private String identifier;
 
-	private final String title;
+	private String title;
 
-	private final Category category;
+	private Category category;
 
-	private final String description;
+	private String description;
 
-	private final int baseScore;
-	
-	private LinkedList<Achievement> achievements;
+	/** Attributes of the item. */
+	private Map<String, String> attributes;
+
+	private Map<String, String> attributeValues;
+
+	private boolean attributeTagFound;
+
+	private int baseScore;
+
+	private List<Achievement> achievements;
+	private boolean attributesTag; 
 
 	/** is this achievement visible? */
-	private final boolean active;
+	private boolean active;
+	private String name;
+	private boolean tag;
+	private ChatCondition condtionObject;
 
-	private final ChatCondition condition;
+	private Class<?> condition;
+	private Object implementation;
+	private Achievement achievement;
+	private Object[] parameter_value;
+	private Class<?>[] parameter_type;
+	private int index;
 
-	
 
-	public List<Achievement> load(final URI uri) throws SAXException {
+
+	public List<Achievement> load( URI uri) throws SAXException {
 		achievements = new LinkedList<Achievement>();
 		// Use the default (non-validating) parser
 		final SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -76,7 +109,7 @@ public final class AchievementsXMLLoader extends DefaultHandler {
 			// Parse the input
 			final SAXParser saxParser = factory.newSAXParser();
 
-			final InputStream is = ItemsXMLLoader.class.getResourceAsStream(uri.getPath());
+			final InputStream is = AchievementsXMLLoader.class.getResourceAsStream(uri.getPath());
 
 			if (is == null) {
 				throw new FileNotFoundException("cannot find resource '" + uri
@@ -94,7 +127,7 @@ public final class AchievementsXMLLoader extends DefaultHandler {
 			throw new SAXException(e);
 		}
 
-		return list;
+		return achievements;
 	}
 
 	@Override
@@ -108,115 +141,87 @@ public final class AchievementsXMLLoader extends DefaultHandler {
 	}
 
 	@Override
-	public void startElement(final String namespaceURI, final String lName, final String qName,
-			final Attributes attrs) {
-		text = "";
-		if (qName.equals("item")) {
+	public void startElement(String uri, String localName, String qName,
+			Attributes attrs) {
+
+		if (qName.equals("achievement")) {
 			name = attrs.getValue("name");
 			attributes = new LinkedHashMap<String, String>();
-			slots = new LinkedList<String>();
 			description = "";
 			implementation = null;
-			useBehavior = null;
-		} else if (qName.equals("type")) {
-			clazz = attrs.getValue("class");
-			subclass = attrs.getValue("subclass");
+
 		} else if (qName.equals("implementation")) {
 
 			final String className = attrs.getValue("class-name");
 
 			try {
-				implementation = Class.forName(className);
-			} catch (final ClassNotFoundException ex) {
+				implementation = Class.forName(className).getConstructor().newInstance();
+			} catch (final Exception ex) {
 				LOGGER.error("Unable to load class: " + className);
 			}
-		} else if (qName.equals("weight")) {
-			weight = Double.parseDouble(attrs.getValue("value"));
-		} else if (qName.equals("value")) {
-			value = Integer.parseInt(attrs.getValue("value"));
-		} else if (qName.equals("slot")) {
-			slots.add(attrs.getValue("name"));
-		} else if (qName.equals("attributes")) {
-			attributesTag = true;
-		} else if (attributesTag) {
-			attributes.put(qName, attrs.getValue("value"));
-		} else if (qName.equals("damage")) {
-			damageType = attrs.getValue("type");
-		} else if (qName.equals("susceptibility")) {
-			susceptibilities.put(attrs.getValue("type"), Double.valueOf(attrs.getValue("value")));
-		} else if (qName.equals("resistance")) {
-			this.resistances.put(attrs.getValue("type"), Double.valueOf(attrs.getValue("value")));
-			this.activeSlots = attrs.getValue("slots");
-		} else if (qName.equals("behavior")) {
-			String className = attrs.getValue("class-name");
-			try {
-				behaviorClass = Class.forName(className);
-			} catch (ClassNotFoundException e) {
-				LOGGER.error("Unable to load class: " + className);
-			}
-			behaviorMap = new HashMap<String, String>();
-		} else if (qName.equals("parameter")) {
-			behaviorMap.put(attrs.getValue("name"), attrs.getValue("value"));
-		}
-	}
-
-	@Override
-	public void endElement(final String namespaceURI, final String sName, final String qName) {
-		if (qName.equals("item")) {
-			final DefaultItem item = new DefaultItem(clazz, subclass, name, -1);
-			item.setWeight(weight);
-			item.setEquipableSlots(slots);
-			item.setAttributes(attributes);
-			item.setDescription(description);
-			item.setValue(value);
-			if (damageType != null) {
-				item.setDamageType(damageType);
-				// An optional element - reset it to avoid leaking to next items
-				damageType = null;
-			}
-			item.setSusceptibilities(susceptibilities);
-			susceptibilities.clear();
-
-			/* SlotActivatedItem */
-			if (this.activeSlots != null) {
-				item.initializeActiveSlotsList(this.activeSlots);
-				this.activeSlots = null;
-			}
-
-			/* StatusResistantItem */
-			if ((this.resistances != null) && !this.resistances.isEmpty()) {
-				item.initializeStatusResistancesList(this.resistances);
-				this.resistances.clear();
-			}
-
-			if (implementation == null) {
-				LOGGER.error("Item without defined implementation: " + name);
-				return;
-			}
-
-			item.setImplementation(implementation);
-			item.setBehavior(useBehavior);
-
-			list.add(item);
-		} else if (qName.equals("attributes")) {
-			attributesTag = false;
+		} else if (qName.equals("identifier")) {
+			identifier = attrs.getValue("value");
+		} else if (qName.equals("title")) {
+			title = attrs.getValue("value");
 		} else if (qName.equals("description")) {
-			if (text != null) {
-				description = text.trim();
-			}
-		} else if (qName.equals("behavior")) {
+			description = attrs.getValue("value");
+		} else if (qName.equals("baseScore")) {
+			baseScore = Integer.parseInt(attrs.getValue("value"));
+		} else if (qName.equals("category")) {
+			category = Category.valueOf(attrs.getValue("value"));
+		} else if (qName.equals("active")) {
+			active = Boolean.parseBoolean(attrs.getValue("value"));
+		} else if (qName.equals("condition")) {
 			try {
-				useBehavior = (UseBehavior) behaviorClass.getConstructor(Map.class).newInstance(behaviorMap);
-			} catch (Exception e) {
-				LOGGER.error("Failed to construct use behavior.", e);
+			condition = Class.forName(attrs.getValue("class-name"));
+			constructor = condition.getConstructors()[0];
+			parameter_value = new Object[constructor.getParameterCount()];
+			parameter_type = constructor.getParameterTypes();
+			}
+			catch(Exception ex){
+				LOGGER.error("Unable to load class: " + condition);
 			}
 		}
-	}
-
+		else if (qName.equals("parameter")) 
+			tag = true;
+		if (tag) {
+			if(index < constructor.getParameterCount()) {
+				try {
+			if(parameter_type[index].equals(int.class) || parameter_type[index].equals(Integer.class)) {
+			parameter_value[index] = Integer.parseInt((attrs.getValue("value")));
+			index++;}
+			else if(parameter_type[index].equals(boolean.class) || parameter_type[index].equals(Boolean.class)) {
+				parameter_value[index] = Boolean.parseBoolean((attrs.getValue("value")));
+				index++;}
+			else if(parameter_type[index].equals(double.class)|| parameter_type[index].equals(Double.class)) {
+				parameter_value[index] = Double.parseDouble((attrs.getValue("value")));
+				index++;}
+			else {
+				parameter_value[index] = attrs.getValue("value");
+				index++;}
+				}catch(Exception ex){
+				LOGGER.error("Unable to load class: " + parameter_value);
+			}}
+		else 
+			index = 0;
+		}}
+		
+	
+	private Constructor<?> constructor; 
 	@Override
-	public void characters(final char[] buf, final int offset, final int len) {
-		text = text + (new String(buf, offset, len)).trim();
+	public void endElement(String uri, String localName, String qName)
+			throws SAXException {
+		
+		if(qName.equals("achievement")) {
+			try {
+
+			condtionObject = (ChatCondition)constructor.newInstance(parameter_value);
+		     }
+			catch(Exception ex){
+				LOGGER.error("Unable to load class: " + condtionObject);
+			}
+			achievements.add(new Achievement(identifier, title, category,description, baseScore, active,condtionObject));
+		}			
 	}
 }
 
-}

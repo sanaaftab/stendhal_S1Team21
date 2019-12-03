@@ -82,30 +82,6 @@ public class Achievement {
 	 */
 	
 	
-//	public Achievement(String name, String clazzName) {
-//		try {
-//			this.name = name;
-//			this.implementationClass = Class.forName(clazzName);
-//			this.buildCreator(implementationClass);
-//		} catch (ClassNotFoundException e) {
-//			logger.error("Error while creating AChievement", e);
-//		}
-//	}
-//
-//	private void buildCreator(final Class< ? > implementation) {
-//		try {
-//			Constructor< ? > construct;
-//			construct = implementation.getConstructor(new Class[] {
-//					String.class, String.class, Category.class, String.class, int.class,
-//					boolean.class, ChatCondition.class});
-//
-//			this.creator = new FullSpellCreator(this, construct);
-//		} catch (final NoSuchMethodException ex) {
-//			logger.error("No matching full constructor for Spell found.", ex);
-//		}
-//
-//	}
-	
 	public Achievement(String identifier, String title, Category category, String description, int baseScore, boolean active, ChatCondition condition) {
 		this.identifier = identifier;
 		this.title = title;
@@ -172,35 +148,35 @@ public class Achievement {
 		return "Achievement<id: "+identifier+", title: "+title+">";
 	}
 	
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
-	public void setIdentifier(String identifier) {
-		this.identifier = identifier;
-	}
-	
-	public void setScore(String baseScore) {
-		this.baseScore = Integer.parseInt(baseScore);
-	}
-	
-	public void setActive(String active) {
-		this.active = Boolean.parseBoolean(active);
-	}
-	
-	public void setCategory(Category category){
-		 this.category = category;
-	}
-
-	public void setCondition(ChatCondition condition) {
-		this.condition = condition;
-		// TODO Auto-generated method stub
-		
-	}
+//	public void setTitle(String title) {
+//		this.title = title;
+//	}
+//	
+//	public void setDescription(String description) {
+//		this.description = description;
+//	}
+//	
+//	public void setIdentifier(String identifier) {
+//		this.identifier = identifier;
+//	}
+//	
+//	public void setScore(String baseScore) {
+//		this.baseScore = Integer.parseInt(baseScore);
+//	}
+//	
+//	public void setActive(String active) {
+//		this.active = Boolean.parseBoolean(active);
+//	}
+//	
+//	public void setCategory(Category category){
+//		 this.category = category;
+//	}
+//
+//	public void setCondition(ChatCondition condition) {
+//		this.condition = condition;
+//		// TODO Auto-generated method stub
+//		
+//	}
 	
 
 }
