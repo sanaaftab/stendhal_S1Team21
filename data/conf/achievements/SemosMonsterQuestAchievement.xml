@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<achievements xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="stendhal ../achievements.xsd ">
+
+	<achievement name="Semos' Protector">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.SemosMonsterQuestAchievementFactory" />
+		<category value="QUEST_SEMOS_MONSTER"/>
+		<attributes>
+			<identifier value="quest.special.daily.0010" />
+			<title value="Semos' Protector" />
+			<description value="Finish daily monster quest 10 times" />
+			<baseScore value="1" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.QuestStateGreaterThanCondition" />
+				<parameter value="daily"/>
+				<parameter value="2"/>
+				<parameter value="9"/>
+		</attributes>
+	</achievement>
+
+	<achievement name="Semos' Guardian">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.SemosMonsterQuestAchievementFactory" />
+		<category value="QUEST_SEMOS_MONSTER"/>
+		<attributes>
+			<identifier value="quest.special.daily.0050" />
+			<title value="Semos' Guardian" />
+			<description value="Finish daily monster quest 50 times" />
+			<baseScore value="1" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.QuestStateGreaterThanCondition" />
+				<parameter value="daily"/>
+				<parameter value="2"/>
+				<parameter value="49"/>
+		</attributes>
+	</achievement>
+	
+	<achievement name="Semos' Hero">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.SemosMonsterQuestAchievementFactory" />
+		<category value="QUEST_SEMOS_MONSTER"/>
+		<attributes>
+			<identifier value="quest.special.daily.0100" />
+			<title value="Semos' Hero" />
+			<description value="Finish daily monster quest 100 times" />
+			<baseScore value="2" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.QuestStateGreaterThanCondition" />
+				<parameter value="daily"/>
+				<parameter value="2"/>
+				<parameter value="99"/>
+		</attributes>
+	</achievement>
+	
+	<achievement name="Semos' Champion">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.SemosMonsterQuestAchievementFactory" />
+		<category value="QUEST_SEMOS_MONSTER"/>
+		<attributes>
+			<identifier value="quest.special.daily.0250" />
+			<title value="Semos' Champion" />
+			<description value="Finish daily monster quest 250 times" />
+			<baseScore value="2" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.QuestStateGreaterThanCondition" />
+				<parameter value="daily"/>
+				<parameter value="2"/>
+				<parameter value="249"/>
+		</attributes>
+	</achievement>
+	
+	<achievement name="Semos' Vanquisher">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.SemosMonsterQuestAchievementFactory" />
+		<category value="QUEST_SEMOS_MONSTER"/>
+		<attributes>
+			<identifier value="quest.special.daily.0500" />
+			<title value="Semos' Vanquisher" />
+			<description value="Finish daily monster quest 500 times" />
+			<baseScore value="5" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.QuestStateGreaterThanCondition" />
+				<parameter value="daily"/>
+				<parameter value="2"/>
+				<parameter value="499"/>
+		</attributes>
+	</achievement>
+</achievements>

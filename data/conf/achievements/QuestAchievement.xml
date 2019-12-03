@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<achievements xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="stendhal ../achievements.xsd ">
+
+	<achievement name="Faiumoni's Casanova">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.QuestAchievementFactory" />
+		<category value="QUEST"/>
+		<attributes>
+			<identifier value="quest.special.elf_princess.0025" />
+			<title value="Faiumoni's Casanova" />
+			<description value="Finish elf princess quest 25 times" />
+			<baseScore value="2" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.QuestStateGreaterThanCondition" />
+				<parameter value="elf_princess"/>
+				<parameter value="2"/>
+				<parameter value="24"/>
+		</attributes>
+	</achievement>
+
+	<achievement name="Heretic">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.QuestAchievementFactory" />
+		<category value="QUEST"/>
+		<attributes>
+			<identifier value="quest.special.kill_monks.0025" />
+			<title value="Heretic" />
+			<description value="Finish Kill Monks quest 25 times" />
+			<baseScore value="5" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.QuestStateGreaterThanCondition" />
+				<parameter value="kill_monks"/>
+				<parameter value="2"/>
+				<parameter value="24"/>
+		</attributes>
+	</achievement>
+	
+	<achievement name="Pathfinder">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.QuestAchievementFactory" />
+		<category value="QUEST"/>
+		<attributes>
+			<identifier value="quest.special.maze" />
+			<title value="Pathfinder" />
+			<description value="Finish the maze" />
+			<baseScore value="1" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.QuestStateGreaterThanCondition" />
+				<parameter value="maze"/>
+				<parameter value="2"/>
+				<parameter value="0"/>
+		</attributes>
+	</achievement>
+	
+	<achievement name="Deathmatch Hero">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.QuestAchievementFactory" />
+		<category value="QUEST"/>
+		<attributes>
+			<identifier value="quest.deathmatch" />
+			<title value="Deathmatch Hero" />
+			<description value="Earn 100,000 points in deathmatch" />
+			<baseScore value="2" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.QuestStateGreaterThanCondition" />
+				<parameter value="deathmatch_score"/>
+				<parameter value="0"/>
+				<parameter value="100000"/>
+		</attributes>
+	</achievement>
+	
+	<achievement name="Aide to Semos folk">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.QuestAchievementFactory" />
+		<category value="QUEST"/>
+		<attributes>
+			<identifier value="quest.special.semos" />
+			<title value="Aide to Semos folk" />
+			<description value="Complete all quests in Semos City" />
+			<baseScore value="2" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.QuestsInRegionCompletedCondition" />
+				<parameter value="Region.SEMOS_CITY"/>
+		</attributes>
+	</achievement>
+	
+	<achievement name="Helper of Ados city dwellers">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.QuestAchievementFactory" />
+		<category value="QUEST"/>
+		<attributes>
+			<identifier value="quest.special.ados" />
+			<title value="Helper of Ados city dwellers" />
+			<description value="Complete all quests in Ados City" />
+			<baseScore value="2" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.QuestsInRegionCompletedCondition" />
+				<parameter value="Region.ADOS_CITY"/>
+		</attributes>
+	</achievement>
+
+	<achievement name="Quest Junkie">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.QuestAchievementFactory" />
+		<category value="QUEST"/>
+		<attributes>
+			<identifier value="quest.count.80" />
+			<title value="Quest Junkie" />
+			<description value="Complete at least 80 quests" />
+			<baseScore value="2" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.QuestCountCompletedCondition" />
+				<parameter value="80"/>
+		</attributes>
+	</achievement>
+</achievements>
