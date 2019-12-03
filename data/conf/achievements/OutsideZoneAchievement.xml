@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<achievements xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="stendhal ../achievements.xsd ">
+
+	<achievement name="Junior Explorer">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.OutsideZoneAchievementFactory" />
+		<category value="OUTSIDE_ZONE"/>
+		<attributes>
+			<identifier value="zone.outside.semos" />
+			<title value="Junior Explorer" />
+			<description value="Visit all outside zones in the Semos region" />
+			<baseScore value="1" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.PlayerVisitedZonesInRegionCondition" />
+			<parameter value="semos"/>
+			<parameter value="true"/>
+			<parameter value="true"/>
+		</attributes>
+	</achievement>
+	
+	<achievement name="Big City Explorer">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.OutsideZoneAchievementFactory" />
+		<category value="OUTSIDE_ZONE"/>
+		<attributes>
+			<identifier value="zone.outside.ados" />
+			<title value="Big City Explorer" />
+			<description value="Visit all outside zones in the Ados region" />
+			<baseScore value="1" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.PlayerVisitedZonesInRegionCondition" />
+			<parameter value="ados"/>
+			<parameter value="true"/>
+			<parameter value="true"/>
+		</attributes>
+	</achievement>
+	
+	<achievement name="Far South">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.OutsideZoneAchievementFactory" />
+		<category value="OUTSIDE_ZONE"/>
+		<attributes>
+			<identifier value="zone.outside.fado" />
+			<title value="Far South" />
+			<description value="Visit all outside zones in the Fado region" />
+			<baseScore value="2" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.PlayerVisitedZonesInRegionCondition" />
+			<parameter value="fado"/>
+			<parameter value="true"/>
+			<parameter value="true"/>
+		</attributes>
+	</achievement>
+	
+	<achievement name="Scout">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.OutsideZoneAchievementFactory" />
+		<category value="OUTSIDE_ZONE"/>
+		<attributes>
+			<identifier value="zone.outside.orril" />
+			<title value="Scout" />
+			<description value="Visit all outside zones in the Orril region" />
+			<baseScore value="2" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.PlayerVisitedZonesInRegionCondition" />
+			<parameter value="orril"/>
+			<parameter value="true"/>
+			<parameter value="true"/>
+		</attributes>
+	</achievement>
+	
+	<achievement name="Jungle Explorer">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.OutsideZoneAchievementFactory" />
+		<category value="OUTSIDE_ZONE"/>
+		<attributes>
+			<identifier value="zone.outside.amazon" />
+			<title value="Jungle Explorer" />
+			<description value="Visit all outside zones in the Amazon region" />
+			<baseScore value="5" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.PlayerVisitedZonesInRegionCondition" />
+			<parameter value="amazon"/>
+			<parameter value="true"/>
+			<parameter value="true"/>
+		</attributes>
+	</achievement>
+	
+	<achievement name="Tourist">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.OutsideZoneAchievementFactory" />
+		<category value="OUTSIDE_ZONE"/>
+		<attributes>
+			<identifier value="zone.outside.athor" />
+			<title value="Tourist" />
+			<description value="Visit all outside zones in the Athor region" />
+			<baseScore value="1" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.PlayerVisitedZonesInRegionCondition" />
+			<parameter value="athor"/>
+			<parameter value="true"/>
+			<parameter value="true"/>
+		</attributes>
+	</achievement>
+	
+	<achievement name="Sky Tower">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.OutsideZoneAchievementFactory" />
+		<category value="OUTSIDE_ZONE"/>
+		<attributes>
+			<identifier value="zone.outside.kikareukin" />
+			<title value="Sky Tower" />
+			<description value="Visit all outside zones in the Kikareukin region" />
+			<baseScore value="2" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.PlayerVisitedZonesInRegionCondition" />
+			<parameter value="kikareukin"/>
+			<parameter value="true"/>
+			<parameter value="true"/>
+		</attributes>
+	</achievement>
+
+</achievements>
