@@ -173,6 +173,7 @@ public final class AchievementsXMLLoader extends DefaultHandler {
 			active = Boolean.parseBoolean(attrs.getValue("value"));
 		} else if (qName.equals("condition")) {
 			try {
+			index = 0;
 			condition = Class.forName(attrs.getValue("class-name"));
 			constructor = condition.getConstructors()[0];
 			parameter_value = new Object[constructor.getParameterCount()];

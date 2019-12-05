@@ -14,6 +14,7 @@ package games.stendhal.server.core.rule;
 
 import java.util.Collection;
 
+import games.stendhal.server.core.rp.achievement.Achievement;
 import games.stendhal.server.core.rule.defaultruleset.DefaultCreature;
 import games.stendhal.server.core.rule.defaultruleset.DefaultItem;
 import games.stendhal.server.core.rule.defaultruleset.DefaultSpell;
@@ -33,6 +34,8 @@ public interface EntityManager {
 	boolean addCreature(DefaultCreature creature);
 
 	boolean addSpell(DefaultSpell spell);
+	
+	boolean addAchievement(Achievement achievement);
 
 	/**
 	 * @return a list of all Creatures that are used at least once.
@@ -43,6 +46,8 @@ public interface EntityManager {
 	 * @return a list of all Items that are being used at least once.
 	 */
 	Collection<Item> getItems();
+	
+	Collection<Achievement> getAchievements();
 
 	/**
 	 * gets a list of all configured creatures
@@ -156,6 +161,14 @@ public interface EntityManager {
 	 * @return true iff a spell with that name exists
 	 */
 	boolean isSpell(String spellName);
+	
+	/**
+	 * checks if achievementIdentifier points to an existing achievement
+	 * @param spellName
+	 * @return true iff a spell with that name exists
+	 */
+	boolean isAchievement(String achievementIdentifier);
+	
 
 	/**
 	 * @return a collection of spells that are used at least once
@@ -166,5 +179,7 @@ public interface EntityManager {
 	 * @return a collection of all available spells
 	 */
 	Collection<String> getConfiguredSpells();
+
+	Achievement getAchievement(String achievement);
 
 }

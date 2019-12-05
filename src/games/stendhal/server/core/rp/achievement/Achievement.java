@@ -95,6 +95,13 @@ public class Achievement {
 	/**
 	 * @return the category of this achievement
 	 */
+	public Achievement getAchievement() {
+		return(this);
+	}
+	
+	/**
+	 * @return the category of this achievement
+	 */
 	public Category getCategory() {
 		return category;
 	}

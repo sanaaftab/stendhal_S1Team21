@@ -22,9 +22,11 @@ import org.apache.log4j.Logger;
 
 import games.stendhal.common.parser.ExpressionType;
 import games.stendhal.common.parser.WordList;
+import games.stendhal.server.core.config.AchievementGroupsXMLLoader;
 import games.stendhal.server.core.config.CreatureGroupsXMLLoader;
 import games.stendhal.server.core.config.ItemGroupsXMLLoader;
 import games.stendhal.server.core.config.SpellGroupsXMLLoader;
+import games.stendhal.server.core.rp.achievement.Achievement;
 import games.stendhal.server.core.rule.EntityManager;
 import games.stendhal.server.entity.Entity;
 import games.stendhal.server.entity.creature.Creature;
@@ -55,11 +57,15 @@ public class DefaultEntityManager implements EntityManager {
 
 	/** lists all spell that are being used at least once . */
 	private final Map<String, Spell> createdSpell;
+	
+	private final Map<String, Achievement> createdAchievement;
 
 	/**
 	 * lists all loaded default spells that are usable
 	 */
 	private final Map<String, DefaultSpell> nameToSpell;
+	
+	private final Map<String, Achievement> nameToAchievement;
 
 	private LowerCaseMap<DefaultCreature> classToCreature;
 
@@ -69,11 +75,30 @@ public class DefaultEntityManager implements EntityManager {
 		createdCreature = new HashMap<String, Creature>();
 		createdItem = new HashMap<String, Item>();
 		createdSpell = new HashMap<String, Spell>();
+		createdAchievement = new HashMap<String, Achievement>();
 		classToItem = new HashMap<String, DefaultItem>();
 		nameToSpell = new HashMap<String, DefaultSpell>();
+		nameToAchievement = new HashMap<String, Achievement>();
 		buildItemTables();
 		buildCreatureTables();
 		buildSpellTables();
+		buildAchievementTables();
+	}
+	
+	/**
+	 * builds the achievement tables
+	 */
+	private void buildAchievementTables() {
+		try {
+			final AchievementGroupsXMLLoader loader = new AchievementGroupsXMLLoader(new URI("/data/conf/achievements.xml"));
+			List<Achievement> loadedAchievements = loader.load();
+			
+			for (Achievement achievement : loadedAchievements) {
+				addAchievement(achievement);
+			}
+		} catch (Exception e) {
+			LOGGER.error("Error: achievement.xml couldn't be loaded", e);
+		}
 	}
 
 	/**
@@ -152,6 +177,17 @@ public class DefaultEntityManager implements EntityManager {
 		}
 	}
 
+	
+	@Override
+	public boolean addAchievement(Achievement achievement) {
+		if(nameToAchievement.containsKey(achievement.getIdentifier())) {
+			LOGGER.warn("Repeated achievement name: "+ achievement.getIdentifier());
+		}
+		nameToAchievement.put(achievement.getIdentifier(), achievement);
+		return true;
+	}
+	
+	
 	@Override
 	public boolean addItem(final DefaultItem item) {
 		final String clazz = item.getItemName();
@@ -162,7 +198,6 @@ public class DefaultEntityManager implements EntityManager {
 		}
 
 		classToItem.put(clazz, item);
-
 		return true;
 	}
 
@@ -192,6 +227,16 @@ public class DefaultEntityManager implements EntityManager {
 		nameToSpell.put(spell.getName(), spell);
 		return true;
 	}
+	
+	
+	/**
+	 * @return a list of all Achievements that are instantiated.
+	 */
+	@Override
+	public Collection<Achievement> getAchievements() {
+		return createdAchievement.values();
+	}
+	
 
 	/**
 	 * @return a list of all Creatures that are instantiated.
@@ -374,10 +419,33 @@ public class DefaultEntityManager implements EntityManager {
 		}
 		return null;
 	}
+	
+	@Override
+	public Achievement getAchievement(String achievement) {
+		if(achievement == null) {
+			throw new IllegalArgumentException("achievement name is  null");
+		}
+		
+		Achievement tempAchievement = nameToAchievement.get(achievement);
+		if (tempAchievement != null) {
+			Achievement new_achievement = tempAchievement.getAchievement();
+			if(!createdAchievement.containsKey(achievement)) {
+				createdAchievement.put(achievement, new_achievement);
+			}
+			return new_achievement;
+		}
+		return null;
+	}
 
 	@Override
 	public boolean isSpell(String spellName) {
 		return nameToSpell.containsKey(spellName);
+	}
+	
+	
+	@Override
+	public boolean isAchievement(String achievementIdentifier) {
+		return nameToAchievement.containsKey(achievementIdentifier);
 	}
 
 	@Override
