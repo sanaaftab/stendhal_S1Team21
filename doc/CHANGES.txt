@@ -1,6 +1,13 @@
 Changelog
 ---------
 ---------
+1.33
+*refactoring*
+- Added additional method of defining and loading achievements to the game by using an XML Loader.
+- Implemented 6 achievement factories using this new method
+
+
+
 1.32
 *features*
 - added Ninja Monkey pet which can steal from nearby players

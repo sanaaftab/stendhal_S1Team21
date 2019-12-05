@@ -168,13 +168,17 @@ Authors of Stendhal are:
   - Diligent Dodo (aka Soniccuz)
   · Artist (mimic, dodo, suba diving concepts)
   James Evennett & Cristina Perea del Olmo
-  - Ninja Monkey feature 
+  - Ninja Monkey feature
+  - Migration of java achievements including tests.
   Shauryan Gautam & Albert Viilik
   - Newspaper
+  - Increasing test coverage of rp/achievements
   Arina Belova
   - Lon Jatham NPC
+  - XML Loader for achievements
   Ilinca Ion & Sana Aftab
   - Market stall in flea market
+  - XML Loader for achievements
 
 
 We also thank many who have contributed to Stendhal by providing patches,
