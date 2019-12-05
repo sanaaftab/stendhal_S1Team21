@@ -32,7 +32,7 @@
     		<element name="baseScore" type="Q3:attribute-integer" />
     		<element name="active" type="Q3:attribute-boolean" />
     		<element name="condition" type="Q3:condition-attribute" />
-        	<element name="parameter" type="Q3:attribute-string" />
+        	<element name="parameter" type="Q3:attribute-string" maxOccurs="unbounded" />
     	</sequence>
     </complexType>
     

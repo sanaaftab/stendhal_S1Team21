@@ -148,35 +148,5 @@ public class Achievement {
 		return "Achievement<id: "+identifier+", title: "+title+">";
 	}
 	
-//	public void setTitle(String title) {
-//		this.title = title;
-//	}
-//	
-//	public void setDescription(String description) {
-//		this.description = description;
-//	}
-//	
-//	public void setIdentifier(String identifier) {
-//		this.identifier = identifier;
-//	}
-//	
-//	public void setScore(String baseScore) {
-//		this.baseScore = Integer.parseInt(baseScore);
-//	}
-//	
-//	public void setActive(String active) {
-//		this.active = Boolean.parseBoolean(active);
-//	}
-//	
-//	public void setCategory(Category category){
-//		 this.category = category;
-//	}
-//
-//	public void setCondition(ChatCondition condition) {
-//		this.condition = condition;
-//		// TODO Auto-generated method stub
-//		
-//	}
-	
 
 }
