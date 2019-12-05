@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="stendhal"
+	xmlns:tns="http://www.example.org/achievements" elementFormDefault="qualified"
+	xmlns:Q3="stendhal">
+	
+	<element name="achievements" type="Q3:Achievements" />
+	
+	<complexType name="Achievements" >
+		<sequence>
+			<element name="achievement" type="Q3:Achievement" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="Achievement">
+		<sequence>
+			<element name="implementation" type="Q3:Implementation" />
+			<element name="category" type="Q3:Category" />
+			<element name="attributes" type="Q3:Attributes" />
+		</sequence>
+		<attribute name="name" type="string" use="required"/>
+	</complexType>
+	
+	<complexType name="Implementation">
+    	<attribute name="class-name" type="string"></attribute>
+    </complexType>
+    
+    <complexType name="Attributes">
+    	<sequence>
+    		<element name="identifier" type="Q3:attribute-string" />
+    		<element name="title" type="Q3:attribute-string" />
+    		<element name="description" type="Q3:attribute-string"/>
+    		<element name="baseScore" type="Q3:attribute-integer" />
+    		<element name="active" type="Q3:attribute-boolean" />
+    		<element name="condition" type="Q3:condition-attribute" />
+        	<element name="parameter" type="Q3:attribute-string" maxOccurs="unbounded" />
+    	</sequence>
+    </complexType>
+    
+     <complexType name="Category">
+    	<attribute name="value" type="Q3:category-attribute" />
+    </complexType>
+    
+    <simpleType name="category-attribute">
+    	<restriction base="string">
+    		<enumeration value="EXPERIENCE" />
+    		<enumeration value="FIGHTING" />
+    		<enumeration value="QUEST" />
+    		<enumeration value="OUTSIDE_ZONE" />
+    		<enumeration value="INTERIOR_ZONE" />
+    		<enumeration value="UNDERGROUND_ZONE" />
+    		<enumeration value="AGE" />
+    		<enumeration value="QUEST_MITHRILBOURGH_ENEMY_ARMY" />
+    		<enumeration value="QUEST_SEMOS_MONSTER" />
+    	</restriction>
+    </simpleType>
+    
+    <complexType name="attribute-string">
+    	<attribute name="value" type="string" />
+    </complexType>
+
+    <complexType name="attribute-integer">
+    	<attribute name="value" type="integer" />
+    </complexType>
+    
+    <complexType name="attribute-boolean">
+    	<attribute name="value" type="boolean" />
+    </complexType>
+    
+    <complexType name="condition-attribute">
+    	<attribute name="class-name" type="string"></attribute>
+    </complexType>
+    
+</schema>

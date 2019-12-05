@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<achievements xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="stendhal ../achievements.xsd ">
+
+	<achievement name="Home maker">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.InteriorZoneAchievementFactory" />
+		<category value="INTERIOR_ZONE"/>
+		<attributes>
+			<identifier value="zone.interior.semos" />
+			<title value="Home maker" />
+			<description value="Visit all interior zones in the Semos region" />
+			<baseScore value="2" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.PlayerVisitedZonesInRegionCondition" />
+			<parameter value="semos"/>
+			<parameter value="false"/>
+			<parameter value="false"/>
+		</attributes>
+	</achievement>
+	
+	<achievement name="Elf visitor">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.InteriorZoneAchievementFactory" />
+		<category value="INTERIOR_ZONE"/>
+		<attributes>
+			<identifier value="zone.interior.nalwor" />
+			<title value="Elf visitor" />
+			<description value="Visit all interior zones in the Nalwor region" />
+			<baseScore value="2" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.PlayerVisitedZonesInRegionCondition" />
+			<parameter value="nalwor"/>
+			<parameter value="false"/>
+			<parameter value="false"/>
+		</attributes>
+	</achievement>
+	
+	<achievement name="Up town guy">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.InteriorZoneAchievementFactory" />
+		<category value="INTERIOR_ZONE"/>
+		<attributes>
+			<identifier value="zone.interior.ados" />
+			<title value="Up town guy" />
+			<description value="Visit all interior zones in the Ados region" />
+			<baseScore value="2" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.PlayerVisitedZonesInRegionCondition" />
+			<parameter value="ados"/>
+			<parameter value="false"/>
+			<parameter value="false"/>
+		</attributes>
+	</achievement>
+
+	<achievement name="Kobold City">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.InteriorZoneAchievementFactory" />
+		<category value="INTERIOR_ZONE"/>
+		<attributes>
+			<identifier value="zone.interior.wofolcity" />
+			<title value="Kobold City" />
+			<description value="Visit all interior zones in Wo'fol" />
+			<baseScore value="2" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.PlayerVisitedZonesInRegionCondition" />
+			<parameter value="wofol city"/>
+			<parameter value="false"/>
+			<parameter value="false"/>
+		</attributes>
+	</achievement>
+	
+	<achievement name="Magic City">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.InteriorZoneAchievementFactory" />
+		<category value="INTERIOR_ZONE"/>
+		<attributes>
+			<identifier value="zone.interior.magiccity" />
+			<title value="Magic City" />
+			<description value="Visit all interior zones in Wo'fol" />
+			<baseScore value="2" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.PlayerVisitedZonesInRegionCondition" />
+			<parameter value="magic city"/>
+			<parameter value="false"/>
+			<parameter value="false"/>
+		</attributes>
+	</achievement>
+
+
+</achievements>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<achievements xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="stendhal ../achievements.xsd ">
+
+	<achievement name="OMG">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.ExperienceAchievementFactory" />
+		<category value="EXPERIENCE"/>
+		<attributes>
+			<identifier value="xp.level.5" />
+			<title value="OMG" />
+			<description value="Reach level 5" />
+			<baseScore value="1" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.LevelGreaterThanCondition" />
+			<parameter value="4"/>
+		</attributes>
+	</achievement>
+
+</achievements>

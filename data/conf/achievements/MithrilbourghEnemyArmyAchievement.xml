@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<achievements xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="stendhal ../achievements.xsd ">
+
+	<achievement name="Sergeant">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.MithrilbourghEnemyArmyAchievementFactory" />
+		<category value="QUEST_MITHRILBOURGH_ENEMY_ARMY"/>
+		<attributes>
+			<identifier value="quest.special.kill_enemy_army.0005" />
+			<title value="Sergeant" />
+			<description value="Finish Kill Enemy Army quest 5 times" />
+			<baseScore value="2" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.QuestStateGreaterThanCondition" />
+				<parameter value="kill_enemy_army"/>
+				<parameter value="IDX"/>
+				<parameter value="4"/>
+		</attributes>
+	</achievement>
+	
+	<achievement name="Major">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.MithrilbourghEnemyArmyAchievementFactory" />
+		<category value="QUEST_MITHRILBOURGH_ENEMY_ARMY"/>
+		<attributes>
+			<identifier value="quest.special.kill_enemy_army.0025" />
+			<title value="Major" />
+			<description value="Finish Kill Enemy Army quest 25 times" />
+			<baseScore value="5" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.QuestStateGreaterThanCondition" />
+				<parameter value="kill_enemy_army"/>
+				<parameter value="IDX"/>
+				<parameter value="24"/>
+		</attributes>
+	</achievement>
+	
+	<achievement name="Major General">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.MithrilbourghEnemyArmyAchievementFactory" />
+		<category value="QUEST_MITHRILBOURGH_ENEMY_ARMY"/>
+		<attributes>
+			<identifier value="quest.special.kill_enemy_army.0050" />
+			<title value="Major General" />
+			<description value="Finish Kill Enemy Army quest 50 times" />
+			<baseScore value="5" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.QuestStateGreaterThanCondition" />
+				<parameter value="kill_enemy_army"/>
+				<parameter value="IDX"/>
+				<parameter value="49"/>
+		</attributes>
+	</achievement>
+	
+	<achievement name="Field Marshal">
+		<implementation class-name="games.stendhal.server.core.rp.achievement.factory.MithrilbourghEnemyArmyAchievementFactory" />
+		<category value="QUEST_MITHRILBOURGH_ENEMY_ARMY"/>
+		<attributes>
+			<identifier value="quest.special.kill_enemy_army.0100" />
+			<title value="Field Marshal" />
+			<description value="Finish Kill Enemy Army quest 100 times" />
+			<baseScore value="5" />
+			<active value="true" />
+			<condition class-name="games.stendhal.server.entity.npc.condition.QuestStateGreaterThanCondition" />
+				<parameter value="kill_enemy_army"/>
+				<parameter value="IDX"/>
+				<parameter value="99"/>
+		</attributes>
+	</achievement>
+
+</achievements>
