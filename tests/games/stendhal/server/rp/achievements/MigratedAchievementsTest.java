@@ -6,9 +6,8 @@ package games.stendhal.server.rp.achievements;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
-//import java.net.URI;
+import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -20,10 +19,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-//import games.stendhal.server.core.config.AchievementsXMLLoader;
+import games.stendhal.server.core.config.AchievementsXMLLoader;
 import games.stendhal.server.core.rp.achievement.Achievement;
 import games.stendhal.server.core.rp.achievement.Category;
-import games.stendhal.server.core.rp.achievement.factory.*;
 import games.stendhal.server.entity.player.Player;
 import games.stendhal.server.maps.MockStendlRPWorld;
 import utilities.PlayerTestHelper;
@@ -68,17 +66,12 @@ public class MigratedAchievementsTest {
 	@After
 	public void tearDown() throws Exception {
 	}
-
-	// To test XML loader, swap factory loader for xml loader.
 	
 	@Test
 	public void testInteriorZoneAchievement() throws URISyntaxException, SAXException, IOException {
-				
-		InteriorZoneAchievementFactory factory = new InteriorZoneAchievementFactory();
-		List<Achievement> achievementList = new ArrayList<Achievement>(factory.createAchievements());
-				
-		//AchievementsXMLLoader loader = new AchievementsXMLLoader();
-		//List<Achievement> achievementList = loader.load(new URI("/data/conf/achievements/InteriorZoneAchievement.xml"));
+								
+		AchievementsXMLLoader loader = new AchievementsXMLLoader();
+		List<Achievement> achievementList = loader.load(new URI("/data/conf/achievements/InteriorZoneAchievement.xml"));
 
 		Achievement firstAchievement = achievementList.get(0);
 		System.out.println(achievementList);
@@ -93,12 +86,9 @@ public class MigratedAchievementsTest {
 	
 	@Test
 	public void testMithrilbourghEnemyArmyAchievement() throws URISyntaxException, SAXException, IOException {
-				
-		MithrilbourghEnemyArmyAchievementFactory factory = new MithrilbourghEnemyArmyAchievementFactory();
-		List<Achievement> achievementList = new ArrayList<Achievement>(factory.createAchievements());
-				
-		//AchievementsXMLLoader loader = new AchievementsXMLLoader();
-		//List<Achievement> achievementList = loader.load(new URI("/data/conf/achievements/MithrilbourghEnemyArmyAchievement.xml"));
+								
+		AchievementsXMLLoader loader = new AchievementsXMLLoader();
+		List<Achievement> achievementList = loader.load(new URI("/data/conf/achievements/MithrilbourghEnemyArmyAchievement.xml"));
 
 		Achievement firstAchievement = achievementList.get(0);
 		System.out.println(achievementList);
@@ -113,12 +103,9 @@ public class MigratedAchievementsTest {
 
 	@Test
 	public void testOutsideZoneAchievement() throws URISyntaxException, SAXException, IOException {
-				
-		OutsideZoneAchievementFactory factory = new OutsideZoneAchievementFactory();
-		List<Achievement> achievementList = new ArrayList<Achievement>(factory.createAchievements());
-				
-		//AchievementsXMLLoader loader = new AchievementsXMLLoader();
-		//List<Achievement> achievementList = loader.load(new URI("/data/conf/achievements/OutsideZoneAchievement.xml"));
+								
+		AchievementsXMLLoader loader = new AchievementsXMLLoader();
+		List<Achievement> achievementList = loader.load(new URI("/data/conf/achievements/OutsideZoneAchievement.xml"));
 
 		Achievement firstAchievement = achievementList.get(0);
 		System.out.println(achievementList);
@@ -133,12 +120,9 @@ public class MigratedAchievementsTest {
 
 	@Test
 	public void testQuestAchievement() throws URISyntaxException, SAXException, IOException {
-				
-		QuestAchievementFactory factory = new QuestAchievementFactory();
-		List<Achievement> achievementList = new ArrayList<Achievement>(factory.createAchievements());
-				
-		//AchievementsXMLLoader loader = new AchievementsXMLLoader();
-		//List<Achievement> achievementList = loader.load(new URI("/data/conf/achievements/QuestAchievement.xml"));
+								
+		AchievementsXMLLoader loader = new AchievementsXMLLoader();
+		List<Achievement> achievementList = loader.load(new URI("/data/conf/achievements/QuestAchievement.xml"));
 
 		Achievement firstAchievement = achievementList.get(0);
 		System.out.println(achievementList);
@@ -153,12 +137,9 @@ public class MigratedAchievementsTest {
 	
 	@Test
 	public void testSemosMonsterQuestAchievement() throws URISyntaxException, SAXException, IOException {
-				
-		SemosMonsterQuestAchievementFactory factory = new SemosMonsterQuestAchievementFactory();
-		List<Achievement> achievementList = new ArrayList<Achievement>(factory.createAchievements());
-				
-		//AchievementsXMLLoader loader = new AchievementsXMLLoader();
-		//List<Achievement> achievementList = loader.load(new URI("/data/conf/achievements/SemosMonsterQuestAchievement.xml"));
+								
+		AchievementsXMLLoader loader = new AchievementsXMLLoader();
+		List<Achievement> achievementList = loader.load(new URI("/data/conf/achievements/SemosMonsterQuestAchievement.xml"));
 
 		Achievement firstAchievement = achievementList.get(0);
 		System.out.println(achievementList);
@@ -173,12 +154,9 @@ public class MigratedAchievementsTest {
 	
 	@Test
 	public void testUndergroundZoneAchievement() throws URISyntaxException, SAXException, IOException {
-	
-		UndergroundZoneAchievementFactory factory = new UndergroundZoneAchievementFactory();
-		List<Achievement> achievementList = new ArrayList<Achievement>(factory.createAchievements());
-				
-		//AchievementsXMLLoader loader = new AchievementsXMLLoader();
-		//List<Achievement> achievementList = loader.load(new URI("/data/conf/achievements/UndergroundZoneAchievement.xml"));
+					
+		AchievementsXMLLoader loader = new AchievementsXMLLoader();
+		List<Achievement> achievementList = loader.load(new URI("/data/conf/achievements/UndergroundZoneAchievement.xml"));
 
 		Achievement firstAchievement = achievementList.get(0);
 		System.out.println(achievementList);
