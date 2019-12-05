@@ -47,7 +47,10 @@
     		<enumeration value="QUEST" />
     		<enumeration value="OUTSIDE_ZONE" />
     		<enumeration value="INTERIOR_ZONE" />
-    		<enumeration value="AGE" />		
+    		<enumeration value="UNDERGROUND_ZONE" />
+    		<enumeration value="AGE" />
+    		<enumeration value="QUEST_MITHRILBOURGH_ENEMY_ARMY" />
+    		<enumeration value="QUEST_SEMOS_MONSTER" />
     	</restriction>
     </simpleType>
     
